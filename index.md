@@ -7,8 +7,20 @@
 - working on more iOS Apps to be released soon
 
 # Current Projects
-- Habits
-- MyWorkout
+## Habits
+- iOS, not yet released
+- SwiftUI, CoreData (CloudKit), WidgetKit
+- simple habit tracker incl. statistics
+
+## MyWorkout
+- iOS, not yet released
+- SwiftUI, CoreData (CloudKit), UserNotifications
+- create, manage and do workouts - all in one app
+
+## ReCharge
+- iOS, university project for Quartett Mobile GmbH
+- SwiftUI, CoreData, CoreML, HealthKit, Combine, WidgetKit, WatchKit, Lottie
+- recharge yourself during your electric car's charging break with activities from four unique categories
 
 # Portfolio
 ## The Infinite Space
