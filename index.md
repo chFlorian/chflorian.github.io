@@ -11,18 +11,18 @@
 - MyWorkout
 
 # Portfolio
-- ## The Infinite Space
+## The Infinite Space
 - iOS, released 2016 (not available anymore)
 - Space Shooter
 - SpriteKit, CoreMotion
-![The Infinite Space](collage-infinite-space.jpeg)
+<img src="collage-infinite-space.jpeg" alt="The Infinite Space" width="1266"/>
 
-- ## Warynth
-- watchOS, released 2016
+## Warynth
+- watchOS, released 2016 (not available anymore)
 - UIKit for watchOS, built before SpriteKit watchOS release
-![Warynth](collage-warynth.png)
+<img src="collage-warynth.png" alt="Warynth" width="624"/>
 
-- ## EvoCalc
-- iOS, released 2016
+## EvoCalc
+- iOS, released 2016 (not available anymore)
 - UIKit
-![EvoCalc](Evocalc.png)
+<img src="Evocalc.png" alt="EvoCalc" width="422"/>
