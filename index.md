@@ -25,6 +25,11 @@
 - recharge yourself during your electric car's charging break with activities from four unique categories
 
 # Portfolio
+## Senior Companion
+- watchOS, bachelor's thesis (2020)
+- WatchKit, SwiftUI, CoreLocation, CoreBluetooth
+- Apple Watch app, "Smart Watch Application Supporting Elderly Built on Adapted Design Guidelines"
+
 ## The Infinite Space
 - iOS, released 2016 (not available anymore)
 - SpriteKit, CoreMotion
@@ -42,3 +47,13 @@
 - UIKit
 - recursive candy calculator for Pokémon Go
 <img src="Evocalc.png" alt="EvoCalc" width="422"/>
+
+## SocNet
+- Web, unreleased ~2011
+- PHP, Javascript, MySQL
+- social network featuring profiles, image upload, online status, direct messages, message groups
+
+## Battle of Oceans
+- Web, unreleased ~2012
+- PHP, Javascript, MySQL
+- one of the many browser games I developed in my early programming career
