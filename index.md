@@ -1,6 +1,7 @@
 ## Florian Schweizer, B.Sc. Informatik: Games Engineering
 
 # Profile
+<img src="profile.jpeg" alt="Profile Picture" width="200">
 - 23 years old
 - currently studying M.Sc. Informatik: Games Engineering
 - had 2 Apps on iOS and 1 App on watchOS AppStore
