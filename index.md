@@ -13,6 +13,7 @@
 - iOS, not yet released
 - SwiftUI, CoreData (CloudKit), WidgetKit
 - simple habit tracker incl. statistics
+<img src="images/collage-habits.png" alt="Warynth" width="624"/>
 
 ## MyWorkout
 - iOS, not yet released
@@ -34,19 +35,19 @@
 - iOS, released 2016 (not available anymore)
 - SpriteKit, CoreMotion
 - motion-controlled space shooter game
-<img src="collage-infinite-space.jpeg" alt="The Infinite Space" width="1266"/>
+<img src="images/collage-infinite-space.jpeg" alt="The Infinite Space" width="1266"/>
 
 ## Warynth
 - watchOS, released 2016 (not available anymore)
 - UIKit for watchOS, built before SpriteKit watchOS release
 - digital-crown controlled labyrinth game
-<img src="collage-warynth.png" alt="Warynth" width="624"/>
+<img src="images/collage-warynth.png" alt="Warynth" width="624"/>
 
 ## EvoCalc
 - iOS, released 2016 (not available anymore)
 - UIKit
 - recursive candy calculator for Pokémon Go
-<img src="Evocalc.png" alt="EvoCalc" width="422"/>
+<img src="images/Evocalc.png" alt="EvoCalc" width="422"/>
 
 ## SocNet
 - Web, unreleased ~2011
