@@ -1,7 +1,7 @@
 ## Florian Schweizer, B.Sc. Informatik: Games Engineering
 
 # Profile
-<img src="profile.jpeg" alt="Profile Picture" width="200"/>
+<img src="images/profile.jpeg" alt="Profile Picture" width="200"/>
 
 - 23 years old
 - currently studying M.Sc. Informatik: Games Engineering
