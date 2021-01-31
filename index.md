@@ -19,17 +19,20 @@
 - iOS, not yet released
 - SwiftUI, CoreData (CloudKit), UserNotifications
 - create, manage and do workouts - all in one app
+### preview images tbd
 
 ## ReCharge
 - iOS, university project for Quartett Mobile GmbH
 - SwiftUI, CoreData, CoreML, HealthKit, Combine, WidgetKit, WatchKit, Lottie
 - recharge yourself during your electric car's charging break with activities from four unique categories
+### preview images tbd
 
 # Portfolio
 ## Senior Companion
 - watchOS, bachelor's thesis (2020)
 - WatchKit, SwiftUI, CoreLocation, CoreBluetooth
 - Apple Watch app, "Smart Watch Application Supporting Elderly Built on Adapted Design Guidelines"
+### preview images tbd
 
 ## The Infinite Space
 - iOS, released 2016 (not available anymore)
@@ -53,8 +56,10 @@
 - Web, unreleased ~2011
 - PHP, Javascript, MySQL
 - social network featuring profiles, image upload, online status, direct messages, message groups
+### preview images tbd
 
 ## Battle of Oceans
 - Web, unreleased ~2012
 - PHP, Javascript, MySQL
 - one of the many browser games I developed in my early programming career
+### preview images tbd
