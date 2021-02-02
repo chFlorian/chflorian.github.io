@@ -32,7 +32,7 @@
 - watchOS, bachelor's thesis (2020)
 - WatchKit, SwiftUI, CoreLocation, CoreBluetooth
 - Apple Watch app, "Smart Watch Application Supporting Elderly Built on Adapted Design Guidelines"
-### preview images tbd
+<img src="images/seniorcompanion.png" alt="Senior Companion" width="368"/>
 
 ## The Infinite Space
 - iOS, released 2016 (not available anymore)
