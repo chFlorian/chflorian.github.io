@@ -19,7 +19,7 @@
 - iOS, not yet released
 - SwiftUI, CoreData (CloudKit), UserNotifications
 - create, manage and do workouts - all in one app
-### preview images tbd
+<img src="images/collage-myworkout.png" alt="MyWorkout" width="1266" />
 
 ## ReCharge
 - iOS, university project for Quartett Mobile GmbH
