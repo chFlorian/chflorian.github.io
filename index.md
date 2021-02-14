@@ -35,19 +35,19 @@
 <img src="images/seniorcompanion.png" alt="Senior Companion" width="368"/>
 
 ## The Infinite Space
-- iOS, released 2016 (not available anymore)
+- iOS, released 2016
 - SpriteKit, CoreMotion
 - motion-controlled space shooter game
 <img src="images/collage-infinite-space.jpeg" alt="The Infinite Space" width="1266"/>
 
 ## Warynth
-- watchOS, released 2016 (not available anymore)
+- watchOS, released 2016
 - UIKit for watchOS, built before SpriteKit watchOS release
 - digital-crown controlled labyrinth game
 <img src="images/collage-warynth.png" alt="Warynth" width="624"/>
 
 ## EvoCalc
-- iOS, released 2016 (not available anymore)
+- iOS, released 2016
 - UIKit
 - recursive candy calculator for Pokémon Go
 <img src="images/Evocalc.png" alt="EvoCalc" width="422"/>
