@@ -17,7 +17,7 @@
 
 ## MyWorkout
 - iOS, not yet released
-- SwiftUI, CoreData (CloudKit), UserNotifications
+- SwiftUI, CoreData (CloudKit), UserNotifications, HealthKit
 - create, manage and do workouts - all in one app
 ### preview images tbd
 
