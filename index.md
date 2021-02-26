@@ -23,7 +23,7 @@
 
 <a href="myworkout/index.html">Learn More</a>
 
-<img src="images/collage-myworkout.png" alt="MyWorkout" width="1266" /><br />
+<img src="images/collage-myworkout.png" alt="MyWorkout" width="1266" /><br /><br />
 <a href="#"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
 ## ReCharge
@@ -45,7 +45,7 @@
 - SpriteKit, CoreMotion
 - motion-controlled space shooter game
 
-<img src="images/collage-infinite-space.jpeg" alt="The Infinite Space" width="1266"/><br />
+<img src="images/collage-infinite-space.jpeg" alt="The Infinite Space" width="1266"/><br /><br />
 <a href="https://apps.apple.com/de/app/the-infinite-space/id1154446356?l=en"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
 ## Warynth
@@ -53,7 +53,7 @@
 - UIKit for watchOS, built before SpriteKit watchOS release
 - digital-crown controlled labyrinth game
 
-<img src="images/collage-warynth.png" alt="Warynth" width="624"/><br />
+<img src="images/collage-warynth.png" alt="Warynth" width="624"/><br /><br />
 <a href="https://apps.apple.com/de/app/warynth/id1158722304?l=en"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
 ## EvoCalc
@@ -61,7 +61,7 @@
 - UIKit
 - recursive candy calculator for Pokémon Go
 
-<img src="images/Evocalc.png" alt="EvoCalc" width="422"/><br />
+<img src="images/Evocalc.png" alt="EvoCalc" width="422"/><br /><br />
 <a href="https://apps.apple.com/de/app/evocalc-for-pok%C3%A9mon-go/id1142213240?l=en"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
 ## SocNet
