@@ -13,6 +13,7 @@
 - iOS, not yet released
 - SwiftUI, CoreData (CloudKit), WidgetKit
 - simple habit tracker incl. statistics
+
 <img src="images/collage-habits.png" alt="Warynth" width="624"/>
 
 ## MyWorkout
@@ -23,6 +24,7 @@
 <a href="myworkout/index.html">Learn More</a>
 
 <img src="images/collage-myworkout.png" alt="MyWorkout" width="1266" />
+
 <a href="#"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
 ## ReCharge
@@ -36,12 +38,14 @@
 - watchOS, bachelor's thesis (2020)
 - WatchKit, SwiftUI, CoreLocation, CoreBluetooth
 - Apple Watch app, "Smart Watch Application Supporting Elderly Built on Adapted Design Guidelines"
+
 <img src="images/seniorcompanion.png" alt="Senior Companion" width="368"/>
 
 ## The Infinite Space
 - iOS, released 2016
 - SpriteKit, CoreMotion
 - motion-controlled space shooter game
+
 <img src="images/collage-infinite-space.jpeg" alt="The Infinite Space" width="1266"/>
 <a href="https://apps.apple.com/de/app/the-infinite-space/id1154446356?l=en"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
@@ -49,6 +53,7 @@
 - watchOS, released 2016
 - UIKit for watchOS, built before SpriteKit watchOS release
 - digital-crown controlled labyrinth game
+
 <img src="images/collage-warynth.png" alt="Warynth" width="624"/>
 <a href="https://apps.apple.com/de/app/warynth/id1158722304?l=en"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
