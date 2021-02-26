@@ -28,7 +28,7 @@
 <a href="#"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
 ## ReCharge
-- iOS, university project for Quartett Mobile GmbH
+- iOS, university project for <a href="https://quartett-mobile.de/index-en.html">Quartett Mobile GmbH</a>
 - SwiftUI, CoreData, CoreML, HealthKit, Combine, WidgetKit, WatchKit, Lottie
 - recharge yourself during your electric car's charging break with activities from four unique categories
 ### preview images tbd
