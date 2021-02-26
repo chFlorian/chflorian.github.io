@@ -19,9 +19,9 @@
 - iOS, not yet released
 - SwiftUI, CoreData (CloudKit), UserNotifications, HealthKit
 - create, manage and do workouts - all in one app
-<img src="images/collage-myworkout.png" alt="MyWorkout" width="1266" />
 <a href="myworkout/index.html">More details</a>
 
+<img src="images/collage-myworkout.png" alt="MyWorkout" width="1266" />
 <a href="#"><img src="myworkout/images/AppStore_white.svg" alt ="get on appstore" width=183 /></a>
 
 ## ReCharge
