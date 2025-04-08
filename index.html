@@ -1,327 +1,142 @@
-<html>
-
-<head>
-    <title>flowritesco.de</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flo Writes Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        ::selection {
-            color: white;
-            background: #2f946c;
-        }
+      .carousel {
+        overflow-x: hidden;
+        overflow-y: visible;
+        position: relative;
+      }
+      .carousel-track {
+        display: flex;
+        width: max-content;
+        animation: scroll 40s linear infinite;
+      }
+      .carousel-track:hover {
+        animation-play-state: paused;
+      }
+      .carousel-item {
+        flex: 0 0 auto;
+        width: 300px;
+        margin-right: 1rem;
+        transition: background-color 0.3s ease;
+      }
+      .carousel-item:hover {
+        background-color: #bfdbfe; /* Tailwind's blue-200 */
+      }
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
     </style>
-</head>
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-600">Flo Writes Code</h1>
+        <nav class="space-x-4">
+          <a href="#about" class="hover:underline text-blue-600">About</a>
+          <a href="#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="#apps" class="hover:underline text-blue-600">Apps</a>
+        </nav>
+      </div>
+    </header>
 
-<body>
-    <!-- header -->
-    <div class="bg-green-600 p-4 flex items-center">
-        <img src="images/image0.png" class="w-8">
-        <a href="#" class="text-white font-medium pl-1">flowritesco.de by Florian
-            Schweizer</a>
-
-        <div>
-            <!--<a href="#apps" class="bg-gray-200 py-2 px-4 rounded hover:bg-gray-100">Apps</a>
-            <a href="#contact" class="bg-gray-200 py-2 px-4 rounded hover:bg-gray-100">Contact</a>
-            <a href="#links" class="bg-gray-200 py-2 px-4 rounded hover:bg-gray-100">Links</a>-->
-        </div>
-
-        <!-- Support on Ko-Fi -->
-        <div class="px-8">
-            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-            <script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'W7W14R38E');kofiwidget2.draw();</script>     
-        </div>
-    </div>
-
-    <!-- Advertisement of latest app -->
-    <div class="mt-8">
-        <a  href="https://apple.co/3iFcjjW">
-            <img src="images/marketingImages/launchbuddy0.png" class="w-5/12 mx-auto rounded bg-green-600 hover:bg-green-500">
+    <section id="about" class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <img src="your-image.jpg" alt="Flo headshot" class="mx-auto rounded-full w-32 h-32 object-cover mb-6 shadow-md">
+        <h2 class="text-3xl font-semibold mb-4 text-blue-700">Hey, I'm Flo 👋</h2>
+        <p class="text-lg leading-relaxed text-gray-700">
+          I write code, make YouTube videos about SwiftUI, iOS development, and indie hacking. I love building tools that empower developers and help people live healthier lives.
+        </p>
+        <a href="mailto:hello@flowritesco.de" class="inline-flex items-center mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+        </svg>
+          Contact Me
         </a>
-    </div>
+      </div>
+    </section>
 
-    <!-- Reviews for LaunchBuddy -->
-    <div class="pt-8 px-8" id="lb-reviews">
-        <div class="font-medium text-xl">LaunchBuddy Reviews</div>
-
-        <iframe loading="lazy" class="pt-4" style="border: 0" width="100%" height="330px" src="https://showcase.reviews/embed/5c5644dd-2726-49da-a923-265b0d8fcc8d"></iframe>
-    </div>
-
-    <!-- Sponsor Flo writes Code -->
-    <div class="pt-8 px-8" id="sponsor">
-        <div class="font-medium text-xl">Sponsor Flo writes Code</div>
-
-        <p class="pt-4">
-            Do you want to bring your product in front of thousands of iOS developers? I am active on Twitter and Youtube, with over 10,000 Twitter account visits and over 8,000 Youtube views each month.
-            Get in contact via <u><a href="https://twitter.com/FloWritesCode">Twitter</a></u> or <u><a href="mailto:fschweizerit@gmail.com">Email</a></u> to learn more and talk about opportunities.
-        </p>
-    </div>
-
-    <!-- social links -->
-    <div class="pt-8 px-8" id="links">
-        <div class="font-medium text-xl">Where to Find Me</div>
-
-        <div class="pt-4 flex">
-            <a href="https://www.youtube.com/FlowritesCode"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/youtube.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">Youtube @FloWritesCode</div>
-                    <div>Learn Swift and SwiftUI the easy way</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-18">Tutorials</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-22">Indie Devlogs</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://twitter.com/FloWritesCode"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/twitter.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">Twitter @FloWritesCode</div>
-                    <div>Get updates on my development</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-18">Quick Tips</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-22">Indie Devlogs</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://github.com/chFlorian"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/github.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">Github @chFlorian</div>
-                    <div>Free access to source code & packages</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-12">Code</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-22">Packages</div>
-                    </div>
-                </div>
-            </a>
+    <section id="youtube" class="py-20 bg-blue-100">
+      <div class="max-w-5xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-semibold mb-12 text-blue-800">🎥 YouTube Videos</h2>
+        <div class="space-y-12">
+          <div class="flex flex-col md:flex-row items-start gap-6 text-left">
+            <div class="w-full md:w-1/2 relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
+              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            <div class="md:w-1/2">
+              <h3 class="text-xl font-bold text-blue-800 mb-2">Video Title 1</h3>
+              <p class="text-gray-700">Short description of what the first video is about, why it's useful or interesting.</p>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row items-start gap-6 text-left">
+            <div class="w-full md:w-1/2 relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
+              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
+            </div>
+            <div class="md:w-1/2">
+              <h3 class="text-xl font-bold text-blue-800 mb-2">Video Title 2</h3>
+              <p class="text-gray-700">Short description of what the second video is about, covering indie iOS dev or SwiftUI tips.</p>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row items-start gap-6 text-left">
+            <div class="w-full md:w-1/2 relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
+              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/C0DPdy98e4c" allowfullscreen></iframe>
+            </div>
+            <div class="md:w-1/2">
+              <h3 class="text-xl font-bold text-blue-800 mb-2">Video Title 3</h3>
+              <p class="text-gray-700">Short description for the third video, maybe covering your app development journey.</p>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- open source packages -->
-    <div class="pt-8 px-8" id="apps">
-        <div class="font-medium text-xl">Open Source Packages</div>
-
-        <div class="pt-4 flex">
-            <a href="https://github.com/chFlorian/Dependency"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/github.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">chFlorian/Dependency</div>
-                    <div>A dependency-injection solution for SwiftUI</div>
-                </div>
-            </a>
-
-            <a href="https://github.com/chFlorian/AppOpenTracker"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/github.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">chFlorian/AppOpenTracker</div>
-                    <div>Keep track of number of sessions and last version opened</div>
-                </div>
-            </a>
-
-            <a href="https://github.com/chFlorian/CommonHelpers"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/github.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">chFlorian/CommonHelpers</div>
-                    <div>A collection of commonly used extensions and helper functions</div>
-                </div>
-            </a>
+    <section id="apps" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-semibold mb-12 text-blue-700">🚀 My Indie Apps</h2>
+        <div class="carousel">
+          <div class="carousel-track">
+            <div class="flex">
+              <a href="https://example.com/app1" class="carousel-item block p-6 border rounded-xl shadow-md bg-blue-50 hover:bg-blue-200">
+                <img src="launchbuddy-icon.png" alt="LaunchBuddy Icon" class="mx-auto w-12 h-12 mb-4">
+                <h3 class="text-xl font-bold text-blue-700">LaunchBuddy</h3>
+                <p class="mt-2 text-gray-700">Easily plan and track your App Store releases.</p>
+              </a>
+              <a href="https://example.com/app2" class="carousel-item block p-6 border rounded-xl shadow-md bg-blue-50 hover:bg-blue-200">
+                <img src="healthstreak-icon.png" alt="HealthStreak Icon" class="mx-auto w-12 h-12 mb-4">
+                <h3 class="text-xl font-bold text-blue-700">HealthStreak</h3>
+                <p class="mt-2 text-gray-700">Keep your health habits on track with streak-based motivation.</p>
+              </a>
+              <a href="https://example.com/app3" class="carousel-item block p-6 border rounded-xl shadow-md bg-blue-50 hover:bg-blue-200">
+                <img src="fastingtracker-icon.png" alt="Fasting Tracker Icon" class="mx-auto w-12 h-12 mb-4">
+                <h3 class="text-xl font-bold text-blue-700">Fasting Tracker</h3>
+                <p class="mt-2 text-gray-700">Track your intermittent fasting sessions and stay consistent.</p>
+              </a>
+              <a href="https://example.com/app4" class="carousel-item block p-6 border rounded-xl shadow-md bg-blue-50 hover:bg-blue-200">
+                <img src="otherapp1-icon.png" alt="Other App 1 Icon" class="mx-auto w-12 h-12 mb-4">
+                <h3 class="text-xl font-bold text-blue-700">Other App 1</h3>
+                <p class="mt-2 text-gray-700">Another helpful tool I've created recently for iOS users and devs.</p>
+              </a>
+              <a href="https://example.com/app5" class="carousel-item block p-6 border rounded-xl shadow-md bg-blue-50 hover:bg-blue-200">
+                <img src="otherapp2-icon.png" alt="Other App 2 Icon" class="mx-auto w-12 h-12 mb-4">
+                <h3 class="text-xl font-bold text-blue-700">Other App 2</h3>
+                <p class="mt-2 text-gray-700">Yet another app made with care to solve a real-world problem.</p>
+              </a>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- app section -->
-    <div class="pt-8 px-8" id="apps">
-        <div class="font-medium text-xl">Apps That I Made</div>
-
-        <!-- one row of apps -->
-        <div class="pt-4 flex">
-            <a href="https://apple.co/3iFcjjW"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/launchbuddy.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">LaunchBuddy</div>
-                    <div>Manage App Releases & Tasks</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-15">macOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="px-1 bg-black text-white rounded w-9">free</div>
-                        <div class="mx-1 px-1 bg-green-600 text-white rounded w-9">new</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3DahKjx"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/framebuddy.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">FrameBuddy</div>
-                    <div>Add Device Frames to Screenshots</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-15">macOS</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3oot6tY"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/forge.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">Forge</div>
-                    <div>Marketing Image Generator for Developers</div>
-                    <div class="flex">
-                        <div class="mx-1 px-1 bg-black text-white rounded w-15">macOS</div>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <!-- one row of apps -->
-        <div class="pt-4 flex">
-            <a href="https://apple.co/3keWnpW"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/challengeme.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">ChallengeMe - Self Improvement</div>
-                    <div>Become the best version of yourself</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">free</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3DahKjx"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/zzz.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">zZz - Sleep Tracker Widget</div>
-                    <div>One tap and your sleep schedule is tracked</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">free</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3oot6tY"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/yum.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">Yum - Food Tracker Widget</div>
-                    <div>Log your meal the easy way</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">free</div>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <!-- one row of apps -->
-        <div class="pt-4 flex">
-            <a href="https://apple.co/3wzPMLK"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/1x1.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">1x1 Train Mental Math</div>
-                    <div>Improve your mental math super quick</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">free</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3oovP6M"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/myworkout.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">MyWorkout Schedule</div>
-                    <div>Workouts, Reminders, Schedules & Achievements</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">free</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3HeJSo7"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/habits.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">Habits - Habit Tracker</div>
-                    <div>Gamified habit tracking & powerful statistics</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">free</div>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <!-- one row of apps -->
-        <div class="pt-4 flex">
-            <a href="https://apple.co/3C5yZkL"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/studycards.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">A+ Study Cards</div>
-                    <div>Cross-platform flash cards</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-15">macOS</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3n5OEMA"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/warynth.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">Warynth</div>
-                    <div>A maze game on your watch</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://apple.co/3n3o72C"
-                class="flex items-center w-4/12 bg-gray-100 rounded p-2 mx-2 hover:bg-gray-200">
-                <img src="images/evocalc.png" class="w-2/12 rounded-xl">
-                <div class="px-2">
-                    <div class="font-medium text-lg">EvoCalc Candy Calculator</div>
-                    <div>Calculate your Pokémon Go candy needs</div>
-                    <div class="flex">
-                        <div class="px-1 bg-black text-white rounded w-9">iOS</div>
-                        <div class="mx-1 px-1 bg-black text-white rounded w-9">free</div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <!-- impressum -->
-    <div class="pt-8 px-8 pb-8" id="impressum">
-        <div class="font-medium text-xl">Impressum</div>
-
-        <p class="pt-4">
-            Flowritesco.de is created by Florian Schweizer<br />
-            <a href="mailto:hello@flowritesco.de">hello@flowritesco.de</a><br />
-            <br />
-            Florian Schweizer - IT Dienstleistungen<br />
-            Promenadestra&szlig;e 11a<br />
-            85521 Ottobrunn<br />
-            Deutschland<br />
-        </p>
-    </div>
-</body>
-
+    <footer class="py-6 bg-blue-100 text-center text-sm text-blue-800">
+      <p>&copy; 2025 Flo Writes Code. Built with Tailwind CSS. Hosted on GitHub Pages.</p>
+      <p>Florian Schweizer - IT Dienstleistungen | Promenadestr. 11a | 85521 Ottobrunn</p>
+    </footer>
+  </body>
 </html>
