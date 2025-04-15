@@ -48,7 +48,7 @@
 
     <section id="about" class="py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 text-center">
-        <img src="images/image0.png" alt="Flo headshot" class="mx-auto rounded-full w-32 h-32 object-cover mb-6 shadow-md">
+        <img src="images/image0.png" alt="Flo headshot" class="mx-auto w-48 h-48 object-cover mb-6">
         <h2 class="text-3xl font-semibold mb-4 text-blue-700">Hey, I'm Flo 👋</h2>
         <p class="text-lg leading-relaxed text-gray-700">
           I write code, make YouTube videos about SwiftUI, iOS development, and indie hacking. I love building tools that empower developers and help people live healthier lives.
@@ -66,31 +66,52 @@
       <div class="max-w-5xl mx-auto px-4 text-center">
         <h2 class="text-3xl font-semibold mb-12 text-blue-800">🎥 YouTube Videos</h2>
         <div class="space-y-12">
-          <div class="flex flex-col md:flex-row items-start gap-6 text-left">
-            <div class="w-full md:w-1/2 relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+          <div class="flex flex-col md:flex-row items-start gap-6 text-left h-32">
+            <div class="w-full md:w-1/3 aspect-video rounded-lg shadow-md">
+              <iframe 
+                class="w-full h-full rounded-lg"
+                src="https://www.youtube.com/embed/zojPt5TVsB8"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
             </div>
-            <div class="md:w-1/2">
-              <h3 class="text-xl font-bold text-blue-800 mb-2">Video Title 1</h3>
-              <p class="text-gray-700">Short description of what the first video is about, why it's useful or interesting.</p>
-            </div>
-          </div>
-          <div class="flex flex-col md:flex-row items-start gap-6 text-left">
-            <div class="w-full md:w-1/2 relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
-              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
-            </div>
-            <div class="md:w-1/2">
-              <h3 class="text-xl font-bold text-blue-800 mb-2">Video Title 2</h3>
-              <p class="text-gray-700">Short description of what the second video is about, covering indie iOS dev or SwiftUI tips.</p>
+            <div class="md:w-2/3 flex flex-col justify-center">
+              <h3 class="text-xl font-bold text-blue-800 mb-2">Introduction to SwiftData</h3>
+              <p class="text-gray-700">Learn the basics of SwiftData. Published the day SwiftData was announced, even before Apple's WWDC session on the framework.</p>
             </div>
           </div>
-          <div class="flex flex-col md:flex-row items-start gap-6 text-left">
-            <div class="w-full md:w-1/2 relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
-              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/C0DPdy98e4c" allowfullscreen></iframe>
+          <div class="flex flex-col md:flex-row items-start gap-6 text-left h-32">
+            <div class="w-full md:w-1/3 aspect-video rounded-lg shadow-md">
+              <iframe 
+                class="w-full h-full rounded-lg"
+                src="https://www.youtube.com/embed/qQTTYt9wnFY"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
             </div>
-            <div class="md:w-1/2">
-              <h3 class="text-xl font-bold text-blue-800 mb-2">Video Title 3</h3>
-              <p class="text-gray-700">Short description for the third video, maybe covering your app development journey.</p>
+            <div class="md:w-2/3 flex flex-col justify-center">
+              <h3 class="text-xl font-bold text-blue-800 mb-2">Stop Using Spacer() in SwiftUI</h3>
+              <p class="text-gray-700">I like to show different ways to layout views in SwiftUI. In this video, I show how to avoid using Spacer() and use the power of the layout system to create more flexible layouts.</p>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row items-start gap-6 text-left h-32">
+            <div class="w-full md:w-1/3 aspect-video rounded-lg shadow-md">
+              <iframe 
+                class="w-full h-full rounded-lg"
+                src="https://www.youtube.com/embed/8ToDo6ZX1nI"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="md:w-2/3 flex flex-col justify-center">
+              <h3 class="text-xl font-bold text-blue-800 mb-2">WidgetKit Masterclass 2024</h3>
+              <p class="text-gray-700">This is the best place to start learning about WidgetKit. The video is a compilation of all my WidgetKit videos, including live activities, dynamic island support, and interactive widgets.</p>
             </div>
           </div>
         </div>
@@ -162,7 +183,33 @@
       </div>
     </section>
 
-    <footer class="py-6 bg-blue-100 text-center text-sm text-blue-800">
+    <section id="conferences" class="py-20 bg-blue-100">
+      <div class="max-w-5xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-semibold mb-12 text-indigo-800">🎤 Conference Talk(s)</h2>
+        <div class="space-y-12">
+          <div class="flex flex-col md:flex-row items-start gap-6 text-left h-32">
+            <div class="w-full md:w-1/3 aspect-video rounded-lg shadow-md">
+              <iframe 
+                class="w-full h-full rounded-lg"
+                src="https://www.youtube.com/embed/MabcKIEu_e0"
+                title="Conference talk video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="md:w-2/3 flex flex-col justify-center">
+              <h3 class="text-xl font-bold text-indigo-800 mb-2">CI/CD (Continuous Improvement, Continuous Discovery)</h3>
+              <p class="text-gray-700">SwiftLeeds • 2022 • Leeds, England, UK</p>
+              <p class="text-gray-700 mt-2">My personal development journey and how you can improve as an iOS developer.</p>
+            </div>
+          </div>
+          <!-- Add future talks here -->
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-6 bg-white text-center text-sm text-blue-800">
       <p>&copy; 2025 Flo Writes Code. Built with Tailwind CSS. Hosted on GitHub Pages.</p>
       <p>Florian Schweizer - IT Dienstleistungen | Promenadestr. 11a | 85521 Ottobrunn</p>
     </footer>
