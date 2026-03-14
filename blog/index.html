@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog — Flo Writes Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
+        <nav class="space-x-4">
+          <a href="../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="../index.html#apps" class="hover:underline text-blue-600">Apps</a>
+          <a href="index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-16">
+      <h1 class="text-4xl font-bold text-blue-800 mb-4">Blog</h1>
+      <p class="text-lg text-gray-600 mb-12">SwiftUI, iOS development, and indie app building.</p>
+
+      <div id="blog-posts" class="space-y-10">
+        <p class="text-gray-500">Loading…</p>
+      </div>
+
+      <section id="sponsor-section" class="mt-16 pt-10 border-t border-blue-200 hidden">
+        <div id="sponsor-slot"></div>
+      </section>
+    <script type="application/json" id="sponsor-data">{"current":{"icon":"https://placehold.co/64x64/2563eb/white?text=S","title":"This week's sponsor","message":"Thanks for supporting the blog and SwiftUI content!","url":"https://example.com"}}</script>
+    <script type="application/json" id="blog-posts-data">[
+  {
+    "slug": "swiftui-custom-layouts",
+    "title": "Beyond VStack & HStack: Custom Layouts in SwiftUI",
+    "date": "2025-03-14",
+    "excerpt": "Learn how to build flexible, reusable layouts with Layout and ViewThatFits instead of reaching for Spacer().",
+    "heroImage": "images/hero.png"
+  }
+]</script>
+    <script>
+      (function () {
+        var container = document.getElementById('blog-posts');
+        function render(posts) {
+          if (!posts || posts.length === 0) {
+            container.innerHTML = '<p class="text-gray-500">No posts yet.</p>';
+            return;
+          }
+          var html = posts.map(function (post) {
+            var dateFormatted = new Date(post.date + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            var imgHtml = post.heroImage
+              ? '<img src="' + post.slug + '/' + post.heroImage + '" alt="" class="w-full h-48 object-cover bg-blue-100" onerror="this.style.display=\'none\'">'
+              : '';
+            return '<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">' +
+              '<a href="' + post.slug + '/index.html" class="block">' +
+              imgHtml +
+              '<div class="p-6">' +
+              '<time class="text-sm text-gray-500" datetime="' + post.date + '">' + dateFormatted + '</time>' +
+              '<h2 class="text-xl font-bold text-blue-800 mt-2 hover:underline">' + post.title + '</h2>' +
+              '<p class="text-gray-600 mt-2">' + post.excerpt + '</p>' +
+              '</div></a></article>';
+          }).join('');
+          container.innerHTML = html;
+        }
+        var el = document.getElementById('blog-posts-data');
+        if (el && el.textContent) {
+          try {
+            render(JSON.parse(el.textContent));
+          } catch (e) {
+            container.innerHTML = '<p class="text-gray-500">Could not load posts.</p>';
+          }
+        } else {
+          var postsUrl = new URL('posts.json', window.location.href).href;
+          fetch(postsUrl)
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(render)
+            .catch(function () { container.innerHTML = '<p class="text-gray-500">Could not load posts.</p>'; });
+        }
+      })();
+
+      (function () {
+        var slot = document.getElementById('sponsor-slot');
+        var section = document.getElementById('sponsor-section');
+        if (!slot || !section) return;
+        function renderSponsor(sponsor) {
+          if (!sponsor || !sponsor.title) return;
+          var html = '<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80">';
+          html += '<img src="' + (sponsor.icon || '') + '" alt="" class="w-12 h-12 rounded-lg flex-shrink-0 object-cover" onerror="this.style.display=\'none\'">';
+          html += '<div class="min-w-0 flex-1">';
+          html += '<div class="font-semibold text-blue-800">' + sponsor.title + '</div>';
+          html += '<p class="text-sm text-gray-600 mt-0.5">' + (sponsor.message || '') + '</p>';
+          html += '</div>';
+          html += '</aside>';
+          if (sponsor.url) {
+            slot.innerHTML = '<a href="' + sponsor.url + '" target="_blank" rel="noopener noreferrer" class="block">' + html + '</a>';
+          } else {
+            slot.innerHTML = html;
+          }
+          section.classList.remove('hidden');
+        }
+        var el = document.getElementById('sponsor-data');
+        if (el && el.textContent) {
+          try {
+            var data = JSON.parse(el.textContent);
+            if (data.current) renderSponsor(data.current);
+          } catch (e) {}
+        }
+        var url = new URL('sponsors.json', window.location.href).href;
+        fetch(url).then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (data) {
+          if (data.current) renderSponsor(data.current);
+        }).catch(function () {});
+      })();
+    </script>
+    </main>
+
+    <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
+      <p>&copy; 2025 Flo Writes Code. <a href="../index.html" class="hover:underline">Back to home</a></p>
+    </footer>
+  </body>
+</html>

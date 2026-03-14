@@ -1,0 +1,9 @@
+[
+  {
+    "slug": "swiftui-custom-layouts",
+    "title": "Beyond VStack & HStack: Custom Layouts in SwiftUI",
+    "date": "2025-03-14",
+    "excerpt": "Learn how to build flexible, reusable layouts with Layout and ViewThatFits instead of reaching for Spacer().",
+    "heroImage": "images/hero.png"
+  }
+]
