@@ -12,9 +12,9 @@
         <a href="../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
         <nav class="space-x-4">
           <a href="../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
           <a href="../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
           <a href="../index.html#apps" class="hover:underline text-blue-600">Apps</a>
-          <a href="index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
         </nav>
       </div>
     </header>
@@ -55,7 +55,7 @@
               ? '<img src="' + post.slug + '/' + post.heroImage + '" alt="" class="w-full h-48 object-cover bg-blue-100" onerror="this.style.display=\'none\'">'
               : '';
             return '<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">' +
-              '<a href="article.html?slug=' + encodeURIComponent(post.slug) + '" class="block">' +
+              '<a href="blog/' + encodeURIComponent(post.slug) + '/" class="block">' +
               imgHtml +
               '<div class="p-6">' +
               '<time class="text-sm text-gray-500" datetime="' + post.date + '">' + dateFormatted + '</time>' +

@@ -310,12 +310,8 @@
     </footer>
     <script type="application/json" id="blog-posts-data">[
   {
-    "slug": "appintents-basics",
-    "title": "Introduction to AppIntents"
-  },
-  {
-    "slug": "swiftui-custom-layouts",
-    "title": "Beyond VStack & HStack: Custom Layouts in SwiftUI"
+    "slug": "stop-using-observableobject",
+    "title": "Stop Using ObservableObject"
   }
 ]</script>
     <script>
@@ -339,7 +335,7 @@
           var last5 = published.slice(0, 5);
           list.innerHTML = last5.map(function (p) {
             var title = p.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            return '<li><a href="blog/article.html?slug=' + encodeURIComponent(p.slug) + '" class="text-blue-600 hover:underline font-medium">' + title + '</a></li>';
+            return '<li><a href="blog/' + encodeURIComponent(p.slug) + '/" class="text-blue-600 hover:underline font-medium">' + title + '</a></li>';
           }).join('');
         }
         render();
