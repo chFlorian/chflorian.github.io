@@ -55,7 +55,7 @@
               ? '<img src="' + post.slug + '/' + post.heroImage + '" alt="" class="w-full h-48 object-cover bg-blue-100" onerror="this.style.display=\'none\'">'
               : '';
             return '<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">' +
-              '<a href="blog/' + encodeURIComponent(post.slug) + '/" class="block">' +
+              '<a href="/' + encodeURIComponent(post.slug) + '/" class="block">' +
               imgHtml +
               '<div class="p-6">' +
               '<time class="text-sm text-gray-500" datetime="' + post.date + '">' + dateFormatted + '</time>' +
