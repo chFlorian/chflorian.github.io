@@ -1,8 +1,11 @@
 {
-  "current": {
-    "icon": "https://placehold.co/64x64/2563eb/white?text=S",
-    "title": "This week's sponsor",
-    "message": "Thanks for supporting the blog and SwiftUI content!",
-    "url": "https://example.com"
-  }
+  "default": {
+    "icon": "https://launchbuddy.app/appicon.png",
+    "title": "LaunchBuddy",
+    "message": "The only project manager made for indie developers",
+    "url": "https://launchbuddy.app"
+  },
+  "sponsors": [],
+  "current": null,
+  "history": []
 }

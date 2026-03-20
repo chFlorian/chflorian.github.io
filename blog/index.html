@@ -23,23 +23,24 @@
       <h1 class="text-4xl font-bold text-blue-800 mb-4">Blog</h1>
       <p class="text-lg text-gray-600 mb-12">SwiftUI, iOS development, and indie app building.</p>
 
-      <div id="blog-posts" class="space-y-10">
+      <div id="blog-posts" class="space-y-6">
         <p class="text-gray-500">Loading…</p>
       </div>
 
-      <section id="sponsor-section" class="mt-16 pt-10 border-t border-blue-200 hidden">
+      <section id="sponsor-section" class="mt-5 hidden">
         <div id="sponsor-slot"></div>
       </section>
-    <script type="application/json" id="sponsor-data">{"current":{"icon":"https://placehold.co/64x64/2563eb/white?text=S","title":"This week's sponsor","message":"Thanks for supporting the blog and SwiftUI content!","url":"https://example.com"}}</script>
-    <script type="application/json" id="blog-posts-data">[
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}</script>
+    <script type="application/json" id="blog-posts-data">
+[
   {
-    "slug": "swiftui-custom-layouts",
-    "title": "Beyond VStack & HStack: Custom Layouts in SwiftUI",
-    "date": "2025-03-14",
-    "excerpt": "Learn how to build flexible, reusable layouts with Layout and ViewThatFits instead of reaching for Spacer().",
-    "heroImage": "images/hero.png"
+    "slug": "stop-using-observableobject",
+    "title": "Stop Using ObservableObject",
+    "date": "2026-03-17",
+    "excerpt": "ObservableObject introduces side effects and performance problems, but there's an alternative."
   }
-]</script>
+]
+    </script>
     <script>
       (function () {
         var container = document.getElementById('blog-posts');
@@ -54,7 +55,7 @@
               ? '<img src="' + post.slug + '/' + post.heroImage + '" alt="" class="w-full h-48 object-cover bg-blue-100" onerror="this.style.display=\'none\'">'
               : '';
             return '<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">' +
-              '<a href="' + post.slug + '/index.html" class="block">' +
+              '<a href="article.html?slug=' + encodeURIComponent(post.slug) + '" class="block">' +
               imgHtml +
               '<div class="p-6">' +
               '<time class="text-sm text-gray-500" datetime="' + post.date + '">' + dateFormatted + '</time>' +
@@ -64,10 +65,13 @@
           }).join('');
           container.innerHTML = html;
         }
+        function filterPublished(posts) {
+          return (posts || []).filter(function (p) { return !p.archived; });
+        }
         var el = document.getElementById('blog-posts-data');
         if (el && el.textContent) {
           try {
-            render(JSON.parse(el.textContent));
+            render(filterPublished(JSON.parse(el.textContent)));
           } catch (e) {
             container.innerHTML = '<p class="text-gray-500">Could not load posts.</p>';
           }
@@ -75,6 +79,7 @@
           var postsUrl = new URL('posts.json', window.location.href).href;
           fetch(postsUrl)
             .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(function (data) { return filterPublished(data); })
             .then(render)
             .catch(function () { container.innerHTML = '<p class="text-gray-500">Could not load posts.</p>'; });
         }
@@ -84,6 +89,40 @@
         var slot = document.getElementById('sponsor-slot');
         var section = document.getElementById('sponsor-section');
         if (!slot || !section) return;
+
+        function todayISO() {
+          return new Date().toISOString().slice(0, 10);
+        }
+
+        function pickSponsor(data) {
+          if (!data || typeof data !== 'object') return null;
+          var today = todayISO();
+
+          // New format: { default, sponsors: [...] }
+          var sponsors = Array.isArray(data.sponsors) ? data.sponsors.slice() : [];
+
+          if (sponsors.length) {
+            sponsors.sort(function (a, b) {
+              var as = a.startDate || '';
+              var bs = b.startDate || '';
+              if (as < bs) return 1;
+              if (as > bs) return -1;
+              return 0;
+            });
+            for (var i = 0; i < sponsors.length; i++) {
+              var s = sponsors[i];
+              if (!s.startDate || !s.endDate) continue;
+              if (s.startDate <= today && today <= s.endDate) {
+                return s;
+              }
+            }
+          }
+
+          if (data.default && data.default.title) return data.default;
+          if (data.current && data.current.title) return data.current;
+          return null;
+        }
+
         function renderSponsor(sponsor) {
           if (!sponsor || !sponsor.title) return;
           var html = '<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80">';
@@ -100,16 +139,19 @@
           }
           section.classList.remove('hidden');
         }
+
         var el = document.getElementById('sponsor-data');
         if (el && el.textContent) {
           try {
             var data = JSON.parse(el.textContent);
-            if (data.current) renderSponsor(data.current);
+            var s = pickSponsor(data);
+            if (s) renderSponsor(s);
           } catch (e) {}
         }
         var url = new URL('sponsors.json', window.location.href).href;
         fetch(url).then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (data) {
-          if (data.current) renderSponsor(data.current);
+          var s = pickSponsor(data);
+          if (s) renderSponsor(s);
         }).catch(function () {});
       })();
     </script>

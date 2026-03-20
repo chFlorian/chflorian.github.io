@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop Using ObservableObject — Flo Writes Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/xcode.min.css" rel="stylesheet">
+    <style>
+      .prose pre { margin: 1rem 0; padding: 0; }
+      .prose pre code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.5; }
+      .prose pre code.hljs { padding: 1.25rem 1.5rem; border-radius: 0.75rem; display: block; overflow-x: auto; }
+      .prose img { border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="../../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
+        <nav class="space-x-4">
+          <a href="../../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="../../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="../../index.html#apps" class="hover:underline text-blue-600">Apps</a>
+          <a href="../index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
+        </nav>
+      </div>
+    </header>
+    <article class="max-w-3xl mx-auto px-4 py-12">
+      <a href="../index.html" class="inline-flex items-center text-blue-600 hover:underline text-sm mb-8">← Back to Blog</a>
+      <header class="mb-10">
+        <time class="text-sm text-gray-500" datetime="2026-03-17">March 20, 2026</time>
+        <h1 class="text-4xl font-bold text-blue-800 mt-2">Stop Using ObservableObject</h1>
+        <p class="text-xl text-gray-600 mt-4">ObservableObject introduces side effects and performance problems, but there's an alternative.</p>
+      </header>
+      <div class="prose prose-lg max-w-none">
+        <div class="my-8 aspect-video w-full max-w-2xl rounded-lg shadow-md overflow-hidden">
+  <iframe class="w-full h-full" src="https://www.youtube.com/embed/_fO01cXbqZM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<p class="text-gray-700 leading-relaxed"><code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">ObservableObject</code> used to be &quot;the only&quot; solution to build ViewModels and other data sources for SwiftUI Views. For several years, the main question was which <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">PropertyWrapper</code> to use: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">ObservedObject</code>, <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">StateObject</code> or <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">EnvironmentObject</code>. No matter which approach you chose, all of them relied on Combine for View updates - your ObservableObject had a <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">objectWillChange</code> object of type <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">ObjectWillChangePublisher</code> that notified Views about any <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Published</code> property changes.</p>
+<div id="sponsor-slot"></div>
+
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">The Problem</h3>
+<p class="text-gray-700 leading-relaxed">As always, the devil is in the details: This publisher fires every time any published property changes - no matter whether the View depends on that property or not. In many simple use cases, this probably doesn&#39;t matter. But once you break down your Views into smaller Subviews or start sharing an <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">ObservableObject</code> across multiple Views, things start to become problematic: There&#39;s obvious performance problems if the View redraws unnecessarily. All of this is happening, because <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">ObservableObject</code> is built (and connected to your Views) with the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Combine</code> framework.</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">The solution</h3>
+<p class="text-gray-700 leading-relaxed">First things first: you can stop reading this article, if your app needs to support pre-iOS 17 (or heavily relies on Combine pipelines for your published properties), because that&#39;s when the framework we&#39;re about to look into was introduced.
+It&#39;s called <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Observation</code> and is a (almost) direct successor to ObservableObject. The framework contains a new <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Observable</code> macro you can attach to a Swift <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">class</code>.</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">// Old approach
+import SwiftUI
+
+class ViewModel: ObservableObject {
+  @Published var username: String = &quot;&quot;
+}
+
+// New approach
+import SwiftUI
+import Observation
+
+@Observable
+class ViewModel {
+  var username: String = &quot;&quot;
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">If you&#39;ve got an eye for details, you&#39;ll notice that there&#39;s a fundamental change: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Implicit State</code>. You used to explicitly mark properties as <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Published</code>. Any non-marked property wouldn&#39;t update the View. But with Observation, any property is updating. You can mark a property as non-updating by attaching the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@ObservationIgnored</code> macro.</p>
+<p class="text-gray-700 leading-relaxed">I started this article by talking about the different PropertyWrappers to attach an <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">ObservableObject</code> to a <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">View</code>. Those don&#39;t work with <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Observable</code> classes. Instead, you&#39;ll just be using <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@State</code> for classes owned by this <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">View</code> and <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Bindable</code> or <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Environment</code> for classes owned by another <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">View</code>.</p>
+
+      </div>
+    </article>
+    <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
+      <p>&copy; 2025 Flo Writes Code. <a href="../../index.html" class="hover:underline">Back to home</a> · <a href="../index.html" class="hover:underline">Blog</a></p>
+    </footer>
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}</script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/swift.min.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.hljs) return;
+        document.querySelectorAll('pre code').forEach(function (el) {
+          window.hljs.highlightElement(el);
+        });
+      });
+    </script>
+    <script>
+      (function () {
+        var slot = document.getElementById('sponsor-slot');
+        if (!slot) return;
+
+        function todayISO() {
+          return new Date().toISOString().slice(0, 10);
+        }
+
+        function pickSponsor(data) {
+          if (!data || typeof data !== 'object') return null;
+          var today = todayISO();
+          var sponsors = Array.isArray(data.sponsors) ? data.sponsors.slice() : [];
+
+          if (sponsors.length) {
+            sponsors.sort(function (a, b) {
+              var as = a.startDate || '';
+              var bs = b.startDate || '';
+              if (as < bs) return 1;
+              if (as > bs) return -1;
+              return 0;
+            });
+            for (var i = 0; i < sponsors.length; i++) {
+              var s = sponsors[i];
+              if (!s.startDate || !s.endDate) continue;
+              if (s.startDate <= today && today <= s.endDate) {
+                return s;
+              }
+            }
+          }
+
+          if (data.default && data.default.title) return data.default;
+          if (data.current && data.current.title) return data.current;
+          return null;
+        }
+
+        function render(sponsor) {
+          if (!sponsor || !sponsor.title) return;
+          var html = '<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80 my-8">';
+          html += '<img src="' + (sponsor.icon || '') + '" alt="" class="w-12 h-12 rounded-lg flex-shrink-0 object-cover" onerror="this.style.display=\'none\'">';
+          html += '<div class="min-w-0 flex-1">';
+          html += '<div class="font-semibold text-blue-800">' + sponsor.title + '</div>';
+          html += '<p class="text-sm text-gray-600 mt-0.5">' + (sponsor.message || '') + '</p>';
+          html += '</div>';
+          html += '</aside>';
+          if (sponsor.url) {
+            slot.innerHTML = '<a href="' + sponsor.url + '" target="_blank" rel="noopener noreferrer" class="block">' + html + '</a>';
+          } else {
+            slot.innerHTML = html;
+          }
+        }
+
+        var el = document.getElementById('sponsor-data');
+        if (el && el.textContent) {
+          try {
+            var data = JSON.parse(el.textContent);
+            var s = pickSponsor(data);
+            if (s) render(s);
+          } catch (e) {}
+        }
+        var url = new URL('../sponsors.json', window.location.href).href;
+        fetch(url).then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (data) {
+          var s = pickSponsor(data);
+          if (s) render(s);
+        }).catch(function () {});
+      })();
+    </script>
+  </body>
+</html>

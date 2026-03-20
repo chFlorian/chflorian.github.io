@@ -1,9 +1,8 @@
 [
   {
-    "slug": "swiftui-custom-layouts",
-    "title": "Beyond VStack & HStack: Custom Layouts in SwiftUI",
-    "date": "2025-03-14",
-    "excerpt": "Learn how to build flexible, reusable layouts with Layout and ViewThatFits instead of reaching for Spacer().",
-    "heroImage": "images/hero.png"
+  "slug": "stop-using-observableobject",
+  "title": "Stop Using ObservableObject",
+  "date": "2026-03-20",
+  "excerpt": "ObservableObject introduces side effects and performance problems, but there's an alternative."
   }
 ]
