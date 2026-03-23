@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppIntents meet MCP — Flo Writes Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/xcode.min.css" rel="stylesheet">
+    <style>
+      .prose pre { margin: 1rem 0; padding: 0; }
+      .prose pre code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.5; }
+      .prose pre code.hljs { padding: 1.25rem 1.5rem; border-radius: 0.75rem; display: block; overflow-x: auto; }
+      .prose img { border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="../../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
+        <nav class="space-x-4">
+          <a href="../../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="../index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
+          <a href="../../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="../../index.html#apps" class="hover:underline text-blue-600">Apps</a>
+        </nav>
+      </div>
+    </header>
+    <article class="max-w-3xl mx-auto px-4 py-12">
+      <a href="../index.html" class="inline-flex items-center text-blue-600 hover:underline text-sm mb-8">← Back to Blog</a>
+      <header class="mb-10">
+        <time class="text-sm text-gray-500" datetime="2026-03-23">March 23, 2026</time>
+        <h1 class="text-4xl font-bold text-blue-800 mt-2">AppIntents meet MCP</h1>
+        <p class="text-xl text-gray-600 mt-4">While AppIntents is mainly used to let Siri talk to your apps, the SwiftMCP package let's it talk to other LLMs as well.</p>
+      </header>
+      <div class="prose prose-lg max-w-none">
+        <p class="text-gray-700 leading-relaxed">AppIntents is a framework first released in iOS 16 to let Siri talk to your apps. Over the years, it has expanded its impact on the OS and now also allows your app‘s actions (intents) in Spotlight Search and Shortcuts. </p>
+<div id="sponsor-slot"></div>
+
+<p class="text-gray-700 leading-relaxed">I‘ve talked about the framework‘s relevancy for years, and with the big Siri overhaul hopefully happening later this year, it’s becoming increasingly obvious that apps „have to“ support it if they want to stay relevant. </p>
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">AppIntents meet MCP</h2>
+<p class="text-gray-700 leading-relaxed">A few weeks ago, I stumbled upon <a href="https://github.com/Cocoanetics/SwiftMCP/" class="text-blue-600 hover:underline">SwiftMCP</a>, a typesafe MCP implementation for Swift based on Swift macros. I explored the package and later talked to Oliver (known as <a href="https://x.com/Cocoanetics" class="text-blue-600 hover:underline">Cocoanetics</a>), about a way to marry SwiftMCP with AppIntents. And boy did he deliver! I actually shipped an update including the new LaunchBuddy MCP server using this package, check out LaunchBuddy <a href="https://launchbuddy.app" class="text-blue-600 hover:underline">here</a>. Let’s dive into how this package works!</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">dependencies: [
+    .package(url: &quot;https://github.com/Cocoanetics/SwiftMCP.git&quot;, branch: &quot;main&quot;)
+]</code></pre>
+<p class="text-gray-700 leading-relaxed">In essence, we should consider 3 concepts: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Server</code>, <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Transport</code>, and <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Tool</code>.</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Server</h3>
+<p class="text-gray-700 leading-relaxed">The server is similar to the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">App</code> protocol. It’s what gets instantiated and talks to the clients using your MCP server.</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">@MCPServer
+class MyServer {
+    …
+}
+
+let server = MyServer()</code></pre>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Transport</h3>
+<p class="text-gray-700 leading-relaxed">This is the kind of connection clients can make to your <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Server</code>. There are different options: HTTP+SSE, stdio, TCP+Bonjour. I won’t pretend that I’m an expert in these, so for my experiments I just used the “standard” HTTP+SSE transport. You create this once (and store it somewhere) and use it to run your server.</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">let transport = HTTPSSETransport(server: server, port: 8080)
+…
+try transport.run()</code></pre>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Tools</h3>
+<p class="text-gray-700 leading-relaxed">Now this is where things get interesting. Tools are the different Swift functions a client can call on your <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">MCPServer</code>. Aside from tools, MCP also supports MCPResource.
+Tools are functions inside your <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">MCPServer</code> class (this could also be an actor). They can return values or just execute some logic in your app. The sky is the limit!</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">@MCPServer
+class MyServer {
+    @MCPTool
+    func add(a: Int, b: Int) -&gt; Int {
+        return a + b
+    }
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">There’s no hard limit on how many tools your server can expose, but you should design your list of tools consciously. As a rule of thumb, prefer making “meta-tools”, that receive configuration parameters - instead of creating multiple similar tools. The <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@MCPTool</code> macro supports adding a description to make it easier for the connected client LLM to decide which tool to use. It’s highly recommended to add this to all of your tools:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">@MCPTool(description: &quot;This tool takes two numbers and returns their sum as an Int.&quot;)
+func add(a: Int, b: Int) -&gt; Int {
+    return a + b
+}</code></pre>
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">Now how does all of this relate to AppIntents?</h2>
+<p class="text-gray-700 leading-relaxed">Great question, because so far it doesn’t. This is where Oliver has been delivering hard, as I hinted in the beginning. In addition to <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@MCPServer</code> and <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@MCPTool</code>, he also build out <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">MCPAppIntentTool</code> to merge <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">SwiftMCP</code> with my beloved <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">AppIntents</code> framework.</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">@MCPServer(name: &quot;MyServer&quot;, version: &quot;0.1&quot;)
+class MyServer: AppShortcutsProvider {</code></pre>
+<p class="text-gray-700 leading-relaxed">As you can see, you just annotate your AppShortcutsProvider with <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@MCPServer</code>. Make sure it’s a class though, as structs aren’t supported and actors produce a compiler error (on my machine).</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">@MCPAppIntentTool(description: &quot;Create a new app idea.&quot;)
+struct CreateAppIdeaIntent: AppIntent {</code></pre>
+<p class="text-gray-700 leading-relaxed">The, you add the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@MCPAppIntentTool</code> macro annotation to each of the AppIntents used by your <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">AppShortcutsProvider</code>. </p>
+<p class="text-gray-700 leading-relaxed">That’s it! </p>
+<p class="text-gray-700 leading-relaxed">Now just create and run your server &amp; transport to let MCP clients talk to your macOS apps. I personally added this configuration to Cursor to talk to my <a href="https://launchbuddy.app" class="text-blue-600 hover:underline">LaunchBuddy</a> MCP server:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;LaunchBuddyMCPServer&quot;: {
+      &quot;url&quot;: &quot;http://localhost:8080/sse&quot;
+    }
+  }
+}</code></pre>
+
+      </div>
+    </article>
+    <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
+      <p>&copy; 2025 Flo Writes Code. <a href="../../index.html" class="hover:underline">Back to home</a> · <a href="../index.html" class="hover:underline">Blog</a></p>
+    </footer>
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}
