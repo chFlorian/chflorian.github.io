@@ -71,3 +71,17 @@ The sponsor box on the blog is driven by **`blog/sponsors.json`**. All blog post
   - See which sponsor is **current for today** based on these timeframes.
   - Download updated `sponsors.json`, replace `blog/sponsors.json`, then run `node scripts/sync-inline-sponsors.js` to update the inline sponsor data in `blog/index.html`, `blog/_template.html`, and all post pages (for file:// preview).
 - **Rendered articles:** `blog/article.html` injects the sponsor slot automatically when it renders markdown; no need to add anything to `article.md`.
+
+---
+
+### Social Preview Images (Open Graph / X)
+
+Each article supports social preview tags (`og:*` and `twitter:*`) and points to `blog/<slug>/social-preview.svg`.
+
+After adding or editing posts in `posts.json`, regenerate the preview images with:
+
+```bash
+node scripts/generate-social-previews.js
+```
+
+This script creates/updates one `social-preview.svg` per post, using the post title + excerpt, your blue accent/background styling, and `images/image0.png` as the logo.

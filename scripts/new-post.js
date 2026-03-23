@@ -12,6 +12,7 @@ const POSTS_JSON_PATH = path.join(BLOG_DIR, "posts.json");
 const BLOG_INDEX_PATH = path.join(BLOG_DIR, "index.html");
 const SITE_INDEX_PATH = path.join(ROOT, "index.html");
 const HOMEPAGE_LIST_MAX = 5;
+const SITE_BASE_URL = "https://chflorian.github.io";
 
 function normalizeSlug(s) {
   return s
@@ -129,7 +130,9 @@ async function main() {
     "{{title}}": escapeHtml(title),
     "{{date}}": dateIso,
     "{{dateFormatted}}": dateFormatted,
-    "{{excerpt}}": excerpt,
+    "{{excerpt}}": escapeHtml(excerpt),
+    "{{canonicalUrl}}": `${SITE_BASE_URL}/blog/${slug}/`,
+    "{{socialImageUrl}}": `${SITE_BASE_URL}/blog/${slug}/social-preview.svg`,
     "{{body}}": bodyPlaceholder,
   };
 

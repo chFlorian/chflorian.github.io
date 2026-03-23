@@ -124,6 +124,21 @@ var body: some View {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}} — Flo Writes Code</title>
+    <meta name="description" content="{{excerpt}}" />
+    <meta name="author" content="Flo Writes Code" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Flo Writes Code" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{excerpt}}" />
+    <meta property="og:url" content="{{canonicalUrl}}" />
+    <meta property="og:image" content="{{socialImageUrl}}" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{title}}" />
+    <meta name="twitter:description" content="{{excerpt}}" />
+    <meta name="twitter:image" content="{{socialImageUrl}}" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/xcode.min.css" rel="stylesheet">
     <style>
@@ -192,6 +207,7 @@ var body: some View {
         var jsonOutput = document.getElementById('jsonOutput');
         var template = document.getElementById('article-template').textContent.trim();
         var knownPosts = [];
+        var siteBaseUrl = 'https://chflorian.github.io';
 
         function normalizeSlug(s) {
           return String(s).toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -309,6 +325,8 @@ var body: some View {
             dateFormatted: formatDate(date),
             excerpt: excerptEl.value || '',
             heroImage: heroEl.value.trim() || null,
+            canonicalUrl: siteBaseUrl + '/blog/' + (normalizeSlug(slugEl.value) || 'untitled') + '/',
+            socialImageUrl: siteBaseUrl + '/blog/' + (normalizeSlug(slugEl.value) || 'untitled') + '/social-preview.svg',
             bodyHtml: bodyHtml
           };
         }
@@ -320,7 +338,9 @@ var body: some View {
               .replace(/\{\{title\}\}/g, escapeHtml(v.title))
               .replace(/\{\{date\}\}/g, v.date)
               .replace(/\{\{dateFormatted\}\}/g, v.dateFormatted)
-              .replace(/\{\{excerpt\}\}/g, v.excerpt)
+              .replace(/\{\{excerpt\}\}/g, escapeHtml(v.excerpt))
+              .replace(/\{\{canonicalUrl\}\}/g, v.canonicalUrl)
+              .replace(/\{\{socialImageUrl\}\}/g, v.socialImageUrl)
               .replace(/\{\{body\}\}/, v.bodyHtml);
             previewEl.onload = function () {
               try {
@@ -342,7 +362,9 @@ var body: some View {
             .replace(/\{\{title\}\}/g, escapeHtml(v.title))
             .replace(/\{\{date\}\}/g, v.date)
             .replace(/\{\{dateFormatted\}\}/g, v.dateFormatted)
-            .replace(/\{\{excerpt\}\}/g, v.excerpt)
+            .replace(/\{\{excerpt\}\}/g, escapeHtml(v.excerpt))
+            .replace(/\{\{canonicalUrl\}\}/g, v.canonicalUrl)
+            .replace(/\{\{socialImageUrl\}\}/g, v.socialImageUrl)
             .replace(/\{\{body\}\}/, v.bodyHtml);
         }
 
@@ -566,7 +588,9 @@ var body: some View {
               .replace(/\{\{title\}\}/g, escapeHtml(vals.title))
               .replace(/\{\{date\}\}/g, vals.date)
               .replace(/\{\{dateFormatted\}\}/g, vals.dateFormatted)
-              .replace(/\{\{excerpt\}\}/g, vals.excerpt)
+              .replace(/\{\{excerpt\}\}/g, escapeHtml(vals.excerpt))
+              .replace(/\{\{canonicalUrl\}\}/g, vals.canonicalUrl)
+              .replace(/\{\{socialImageUrl\}\}/g, vals.socialImageUrl)
               .replace(/\{\{body\}\}/, vals.bodyHtml);
           }
 
