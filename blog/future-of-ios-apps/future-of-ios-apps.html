@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Future of iOS Apps — Flo Writes Code</title>
+    <meta name="description" content="Let's explore how users will interact with apps in the future and how we can prepare today." />
+    <meta name="author" content="Flo Writes Code" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Flo Writes Code" />
+    <meta property="og:title" content="The Future of iOS Apps" />
+    <meta property="og:description" content="Let's explore how users will interact with apps in the future and how we can prepare today." />
+    <meta property="og:url" content="https://chflorian.github.io/blog/future-of-ios-apps/" />
+    <meta property="og:image" content="https://chflorian.github.io/blog/future-of-ios-apps/social-preview.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Future of iOS Apps" />
+    <meta name="twitter:description" content="Let's explore how users will interact with apps in the future and how we can prepare today." />
+    <meta name="twitter:image" content="https://chflorian.github.io/blog/future-of-ios-apps/social-preview.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/xcode.min.css" rel="stylesheet">
+    <style>
+      .prose pre { margin: 1rem 0; padding: 0; }
+      .prose pre code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.5; }
+      .prose pre code.hljs { padding: 1.25rem 1.5rem; border-radius: 0.75rem; display: block; overflow-x: auto; }
+      .prose img { border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="../../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
+        <nav class="space-x-4">
+          <a href="../../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="../index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
+          <a href="../../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="../../index.html#apps" class="hover:underline text-blue-600">Apps</a>
+        </nav>
+      </div>
+    </header>
+    <article class="max-w-3xl mx-auto px-4 py-12">
+      <a href="../index.html" class="inline-flex items-center text-blue-600 hover:underline text-sm mb-8">← Back to Blog</a>
+      <header class="mb-10">
+        <time class="text-sm text-gray-500" datetime="2026-03-29">March 29, 2026</time>
+        <h1 class="text-4xl font-bold text-blue-800 mt-2">The Future of iOS Apps</h1>
+        <p class="text-xl text-gray-600 mt-4">Let's explore how users will interact with apps in the future and how we can prepare today.</p>
+      </header>
+      <div class="prose prose-lg max-w-none">
+        <p class="text-gray-700 leading-relaxed">It all started with <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">$0.99</code>, but the transition from paid upfront to subscriptions isn&#39;t the only major change the app ecosystem has went through. </p>
+<div id="sponsor-slot"></div>
+
+<p class="text-gray-700 leading-relaxed">In my opinion, the first major change was the addition of <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">WidgetKit</code>. While in the first versions, widgets didn&#39;t support any interactivity and were limited to the user&#39;s home screen, having widgets meant that certain interactions were moved away from the in-app-experience to the home screen. Over the years, widgets have been expanded to support tiny animations and interactive buttons through the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">AppIntents</code> framework. They can also appear on the lock screen, on Apple Watch, and even inside the Control Center. </p>
+<div class="my-8 aspect-video w-full max-w-2xl rounded-lg shadow-md overflow-hidden">
+  <iframe class="w-full h-full" src="https://www.youtube.com/embed/8ToDo6ZX1nI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<p class="text-gray-700 leading-relaxed">We also got Live Activities - yet another way to surface your app&#39;s content in the OS. And another reason for your users to <strong>not</strong> open your app. Now the question is where this is headed.  And to me, the answer is clear:</p>
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">Siri 2.0 and the AppIntents framework</h2>
+<p class="text-gray-700 leading-relaxed">With a revamped Siri, and people getting used to asking Chatbots like ChatGPT and Gemini instead of opening a search engine and finding the result themselves it becomes quite clear what the future of iOS apps <strong>might</strong> look like.</p>
+<p class="text-gray-700 leading-relaxed">I believe that apps will more or less be transformed into databases. They collect data through some way (e.g. messages sent to you, health data collected by peripherals, weather forecasts from your server), and allow users to view &amp; interact with that data. In reality, this is already the case for most apps - they are just an abstraction on <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">CRUD</code>. But with Siri 2.0, this cycle might be broken. Sending messages might not take place inside your app. Instead, people might start doing that through Siri using their voice. And the same is probably true for reading your app&#39;s data. That&#39;s just a quick Siri query away. </p>
+<p class="text-gray-700 leading-relaxed">And it makes sense: this is the easier and faster way to interact with the app. Why do audiobooks exist? Because reading is slow. Now you might say that there probably also is some delay in between your user&#39;s voice input and Siri saying the result from within your app. You&#39;re right about that. But opening an app, getting overwhelmed by tons of content (e.g. other unread messages or new posts), and navigating to a specific screen also takes time. More than time, it costs mental resources.</p>
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">Are apps and UI dead then?</h2>
+<p class="text-gray-700 leading-relaxed">This could be a first logical conclusion, but I don&#39;t think so - at least for now. There&#39;s still a place for beautifully crafted interfaces and interactions. In fact, our current &quot;vibecoded apps-floaded App Store&quot; era is the best time ever to publish a well polished and thought-through app. As always, quality matters. And part of the quality of apps will soon be how well they integrate with AI chatbots like Siri 2.0.</p>
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">My advice</h2>
+<p class="text-gray-700 leading-relaxed">Go all in on quality, while making sure all your app&#39;s core functionality (creating, editing, reading, and deleting content) is available to Siri. Today, this is done through AppIntents and you can already prepare your apps. Don&#39;t sleep on it.</p>
+
+      </div>
+    </article>
+    <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
+      <p>&copy; 2025 Flo Writes Code. <a href="../../index.html" class="hover:underline">Back to home</a> · <a href="../index.html" class="hover:underline">Blog</a></p>
+    </footer>
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}<\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/swift.min.js"><\/script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.hljs) return;
+        document.querySelectorAll('pre code').forEach(function (el) {
+          window.hljs.highlightElement(el);
+        });
+      });
+    <\/script>
+    <script>
+      (function(){var slot=document.getElementById("sponsor-slot");if(!slot)return;function todayISO(){return new Date().toISOString().slice(0,10);}function pickSponsor(data){if(!data||typeof data!=="object")return null;var today=todayISO(),sponsors=Array.isArray(data.sponsors)?data.sponsors.slice():[];if(sponsors.length){sponsors.sort(function(a,b){var as=a.startDate||"",bs=b.startDate||"";if(as<bs)return 1;if(as>bs)return -1;return 0;});for(var i=0;i<sponsors.length;i++){var s=sponsors[i];if(!s.startDate||!s.endDate)continue;if(s.startDate<=today&&today<=s.endDate)return s;}}if(data.default&&data.default.title)return data.default;if(data.current&&data.current.title)return data.current;return null;}function render(s){if(!s||!s.title)return;var html='<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80 my-8">';html+='<img src="'+(s.icon||'')+'" alt="" class="w-12 h-12 rounded-lg flex-shrink-0 object-cover" onerror="this.style.display=\'none\'">';html+='<div class="min-w-0 flex-1"><div class="font-semibold text-blue-800">'+s.title+'</div>';html+='<p class="text-sm text-gray-600 mt-0.5">'+(s.message||'')+'</p></div></aside>';slot.innerHTML=s.url?'<a href="'+s.url+'" target="_blank" rel="noopener noreferrer" class="block">'+html+'</a>':html;}var el=document.getElementById("sponsor-data");if(el&&el.textContent){try{var data=JSON.parse(el.textContent);var s=pickSponsor(data);if(s)render(s);}catch(e){}}var url=new URL("../sponsors.json",window.location.href).href;fetch(url).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(data){var s=pickSponsor(data);if(s)render(s);}).catch(function(){});})();
+    <\/script>
+  </body>
+</html>
