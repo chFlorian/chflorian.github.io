@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You're holding SwiftUI wrong — Flo Writes Code</title>
+    <meta name="description" content="As with many &quot;computer problems&quot;, the real problem is usually in front of the screen." />
+    <meta name="author" content="Flo Writes Code" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Flo Writes Code" />
+    <meta property="og:title" content="You're holding SwiftUI wrong" />
+    <meta property="og:description" content="As with many &quot;computer problems&quot;, the real problem is usually in front of the screen." />
+    <meta property="og:url" content="https://chflorian.github.io/blog/holding-it-wrong/" />
+    <meta property="og:image" content="https://chflorian.github.io/blog/holding-it-wrong/social-preview.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="You're holding SwiftUI wrong" />
+    <meta name="twitter:description" content="As with many &quot;computer problems&quot;, the real problem is usually in front of the screen." />
+    <meta name="twitter:image" content="https://chflorian.github.io/blog/holding-it-wrong/social-preview.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/xcode.min.css" rel="stylesheet">
+    <style>
+      .prose pre { margin: 1rem 0; padding: 0; }
+      .prose pre code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.5; }
+      .prose pre code.hljs { padding: 1.25rem 1.5rem; border-radius: 0.75rem; display: block; overflow-x: auto; }
+      .prose img { border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="../../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
+        <nav class="space-x-4">
+          <a href="../../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="../index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
+          <a href="../../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="../../index.html#apps" class="hover:underline text-blue-600">Apps</a>
+        </nav>
+      </div>
+    </header>
+    <article class="max-w-3xl mx-auto px-4 py-12">
+      <a href="../index.html" class="inline-flex items-center text-blue-600 hover:underline text-sm mb-8">← Back to Blog</a>
+      <header class="mb-10">
+        <time class="text-sm text-gray-500" datetime="2026-04-02">April 2, 2026</time>
+        <h1 class="text-4xl font-bold text-blue-800 mt-2">You're holding SwiftUI wrong</h1>
+        <p class="text-xl text-gray-600 mt-4">As with many &quot;computer problems&quot;, the real problem is usually in front of the screen.</p>
+      </header>
+      <div class="prose prose-lg max-w-none">
+        <p class="text-gray-700 leading-relaxed">This year, I decided to post an April fools joke on X that hit right home for quite a few people:</p>
+<div id="sponsor-slot"></div>
+
+<p class="text-gray-700 leading-relaxed"><code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">I´m gonna go all in on UIKit from now on.</code> - <a href="https://x.com/@FloWritesCode" class="text-blue-600 hover:underline">@FloWritesCode</a></p>
+<p class="text-gray-700 leading-relaxed">The irony behind this (and the reason so many people believed it) is that there are genuinely many people deciding to switch back to UIKit lately.</p>
+<p class="text-gray-700 leading-relaxed">And I understand it for those who used UIKit for many years before originally switching to SwiftUI. It&#39;s their framework of choice and they likely have a much deeper understanding of it compared to SwiftUI.</p>
+<p class="text-gray-700 leading-relaxed">This matters. Especially for a paradigm-defining framework like SwiftUI, it&#39;s important to understand how it works in addition to understanding how to use it. And here&#39;s the caveat: SwiftUI is designed to be easy to use - that&#39;s the entire purpose of the framework. But it&#39;s hard to understand, since there are so many internal mechanisms disguised as <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">PropertyWrappers</code> and <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Macros</code>.</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Why people are switching back</h3>
+<p class="text-gray-700 leading-relaxed">We&#39;ve had the UIKit vs. SwiftUI debate since the framework came out. Truth be told, the first few years of SwiftUI were rough - especially those things that were easy in UIKit (e.g. navigation). I totally understand if people were hesitant to fully move to SwiftUI in those years - there&#39;s a reason for engineering&#39;s oldest mantra <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">´never change a running system´</code>. Luckily, Apple gave us HostingControllers and several other APIs to let the two frameworks co-exist in our codebases. 
+But those times are now over. SwiftUI is pretty much feature complete and if it there&#39;s still a small thing it can&#39;t do you can still integrate UIKit for that little aspect.</p>
+<p class="text-gray-700 leading-relaxed">Nowadays, there&#39;s another reason why people think about this debate again: LLMs.
+This one makes a lot more sense to me. Essentially, LLMs massively speed up coding. And development speed is one of the (if not <strong>the</strong>) reason to use SwiftUI in the first place. So with this bottleneck taken care of, I absolutely understand why UIKit-lovers are thinking about going back right now. If I was a big UIKit lover, I&#39;d probably do the same. Not because one framework is better than another, but because I prefer one (due to the API design or the amount of experience I have with it).</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Why SwiftUI is the still best way to build an app</h3>
+<p class="text-gray-700 leading-relaxed">Because Apple said so. They did (at WWDC 2024). And it actually matters, because they are the ones providing the tooling, making the API design decisions and maintaining both frameworks. Of course that wouldn&#39;t be worth a lot if they didn&#39;t walk the walk, but they do. Just look at liquid glass. It&#39;s essentially free if you&#39;re using (standard) SwiftUI, but requires lots of manual work if your entire codebase is made up of custom UIViews. Liquid glass (which by itself is of course quite controversial) isn&#39;t the only piece of evidence supporting Apple&#39;s claim. Look at widgets, live activities, dynamic island, and control center controls (ok, technically all of these are part of WidgetKit, but these are all modern iOS concepts you should probably support for a tight OS integration).</p>
+<p class="text-gray-700 leading-relaxed">When watchOS first launched, apps were mostly made with WatchKit UI. Now they are made with SwiftUI.
+When visionOS launched, there wasn&#39;t even a VisionKit for UI. It immediately adopted SwiftUI (and technically also supports UIKit, but I doubt many apps use it).</p>
+<p class="text-gray-700 leading-relaxed">Regarding the LLM-specific reasons: Yes, LLMs still struggle with SwiftUI. But you shouldn&#39;t use LLMs to generate SwiftUI code. You should use agentic systems like Cursor or Claude Code instead. And heck, you probably shouldn&#39;t be generating production code for a framework you don&#39;t understand in any case.</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Take home message</h3>
+<p class="text-gray-700 leading-relaxed">Do whatever floats your boat! Nobody can forbid you from using a framework. Sure, many older apps still use UIKit. If that&#39;s the case for yours, you might want to continue down that road (but keep in mind that SwiftUI is preferred by Apple). For newer apps and especially if you&#39;re just learning to code, I strongly recommend SwiftUI. If you want to kickstart your SwiftUI journey, I&#39;d recommend <a href="https://codewithchris.samcart.com/referral/cwcplus/bslpM1CJcoQpCbdD" class="text-blue-600 hover:underline">giving CWC+ a try (affiliate link)</a>. They have many courses for beginners and advanced developers. If you&#39;re interested in understanding SwiftUI and advanced concepts in the framework, you can <a href="https://youtube.com/FloWritesCode" class="text-blue-600 hover:underline">check out my YouTube channel</a> to learn more.</p>
+
+      </div>
+    </article>
+    <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
+      <p>&copy; 2025 Flo Writes Code. <a href="../../index.html" class="hover:underline">Back to home</a> · <a href="../index.html" class="hover:underline">Blog</a></p>
+    </footer>
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}<\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/swift.min.js"><\/script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.hljs) return;
+        document.querySelectorAll('pre code').forEach(function (el) {
+          window.hljs.highlightElement(el);
+        });
+      });
+    <\/script>
+    <script>
+      (function(){var slot=document.getElementById("sponsor-slot");if(!slot)return;function todayISO(){return new Date().toISOString().slice(0,10);}function pickSponsor(data){if(!data||typeof data!=="object")return null;var today=todayISO(),sponsors=Array.isArray(data.sponsors)?data.sponsors.slice():[];if(sponsors.length){sponsors.sort(function(a,b){var as=a.startDate||"",bs=b.startDate||"";if(as<bs)return 1;if(as>bs)return -1;return 0;});for(var i=0;i<sponsors.length;i++){var s=sponsors[i];if(!s.startDate||!s.endDate)continue;if(s.startDate<=today&&today<=s.endDate)return s;}}if(data.default&&data.default.title)return data.default;if(data.current&&data.current.title)return data.current;return null;}function render(s){if(!s||!s.title)return;var html='<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80 my-8">';html+='<img src="'+(s.icon||'')+'" alt="" class="w-12 h-12 rounded-lg flex-shrink-0 object-cover" onerror="this.style.display=\'none\'">';html+='<div class="min-w-0 flex-1"><div class="font-semibold text-blue-800">'+s.title+'</div>';html+='<p class="text-sm text-gray-600 mt-0.5">'+(s.message||'')+'</p></div></aside>';slot.innerHTML=s.url?'<a href="'+s.url+'" target="_blank" rel="noopener noreferrer" class="block">'+html+'</a>':html;}var el=document.getElementById("sponsor-data");if(el&&el.textContent){try{var data=JSON.parse(el.textContent);var s=pickSponsor(data);if(s)render(s);}catch(e){}}var url=new URL("../sponsors.json",window.location.href).href;fetch(url).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(data){var s=pickSponsor(data);if(s)render(s);}).catch(function(){});})();
+    <\/script>
+  </body>
+</html>
