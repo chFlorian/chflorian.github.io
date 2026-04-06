@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to SwiftData — Flo Writes Code</title>
+    <meta name="description" content="The Swift-first solution for on-device persistance in SwiftUI." />
+    <meta name="author" content="Flo Writes Code" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Flo Writes Code" />
+    <meta property="og:title" content="Introduction to SwiftData" />
+    <meta property="og:description" content="The Swift-first solution for on-device persistance in SwiftUI." />
+    <meta property="og:url" content="https://chflorian.github.io/blog/introduction-to-swiftdata/" />
+    <meta property="og:image" content="https://chflorian.github.io/blog/introduction-to-swiftdata/social-preview.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Introduction to SwiftData" />
+    <meta name="twitter:description" content="The Swift-first solution for on-device persistance in SwiftUI." />
+    <meta name="twitter:image" content="https://chflorian.github.io/blog/introduction-to-swiftdata/social-preview.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/xcode.min.css" rel="stylesheet">
+    <style>
+      .prose pre { margin: 1rem 0; padding: 0; }
+      .prose pre code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.5; }
+      .prose pre code.hljs { padding: 1.25rem 1.5rem; border-radius: 0.75rem; display: block; overflow-x: auto; }
+      .prose img { border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="../../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
+        <nav class="space-x-4">
+          <a href="../../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="../index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
+          <a href="../../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="../../index.html#apps" class="hover:underline text-blue-600">Apps</a>
+        </nav>
+      </div>
+    </header>
+    <article class="max-w-3xl mx-auto px-4 py-12">
+      <a href="../index.html" class="inline-flex items-center text-blue-600 hover:underline text-sm mb-8">← Back to Blog</a>
+      <header class="mb-10">
+        <time class="text-sm text-gray-500" datetime="2026-04-06">April 6, 2026</time>
+        <h1 class="text-4xl font-bold text-blue-800 mt-2">Introduction to SwiftData</h1>
+        <p class="text-xl text-gray-600 mt-4">The Swift-first solution for on-device persistance in SwiftUI.</p>
+      </header>
+      <div class="prose prose-lg max-w-none">
+        <p class="text-gray-700 leading-relaxed">For over a decade, CoreData was the go-to first-party solution for on-device persistence. The framework also supports CloudKit, allowing us developers to &quot;easily&quot; sync data between the user&#39;s iCloud-enabled devices. Custom store URLs allow sharing the database with an app&#39;s extensions (like widgets).</p>
+<div id="sponsor-slot"></div>
+
+<p class="text-gray-700 leading-relaxed">SwiftData is the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">SwiftUI of Persistence</code>. CoreData is like UIKit. Still relevant, but lots of apps can benefit from the simpler APIs and better integrations that the newer framework offers. Let&#39;s dive in!</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Creating models</h3>
+<p class="text-gray-700 leading-relaxed">What used to be done in confusing model files, is now implemented right in Swift. Let me give you an example:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">import SwiftData
+
+@Model
+class Book {
+    var name: String
+    var releaseDate: Date 
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">This is a very simple example, you&#39;re right. But it actually doesn&#39;t get much more complex. Let&#39;s briefly cover two important concepts: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Attributes</code> and <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Relationships</code>.</p>
+<p class="text-gray-700 leading-relaxed"><code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Attributes</code> allow you to change the behavior of properties (<a href="https://developer.apple.com/documentation/swiftdata/schema/attribute/option" class="text-blue-600 hover:underline">i.e. making them unique or getting them indexed in Spotlight</a>). Have a look at this expanded example that makes sure the name property is always unique:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">import SwiftData
+
+@Model
+class Book {
+    @Attribute(.unique) var name: String
+    var releaseDate: Date 
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">To store a <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">Relationship</code> between books and authors, let&#39;s have a look at this example:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">import SwiftData
+
+@Model
+class Book {
+    @Attribute(.unique) var name: String
+    var releaseDate: Date 
+ 
+    var author: Author?
+}
+
+@Model
+class Author {
+    var name: String
+
+    var books: [Book]
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">No, you don&#39;t need to explicitly add the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Relationship</code> macro to your relationships in most cases. To learn more about this behavior, I recommend reading the <a href="https://developer.apple.com/documentation/swiftdata/preserving-your-apps-model-data-across-launches" class="text-blue-600 hover:underline">documentation</a> and <a href="https://www.hackingwithswift.com/quick-start/swiftdata/inferred-vs-explicit-relationships" class="text-blue-600 hover:underline">this article by Paul Hudson</a>.</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">App-level setup</h3>
+<p class="text-gray-700 leading-relaxed">Now that we have successfully created our models, it&#39;s time to tell our app struct about them.</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">import SwiftData
+import SwiftUI
+
+@main
+struct MyBookApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(for: [
+            Book.self,
+            Author.self
+        ])
+    }
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">Technically, you don&#39;t need to specify all types if they appear in a relationship with another specified type. I prefer to be explicit here and always list all <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">@Model</code> types.</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Reading data</h3>
+<p class="text-gray-700 leading-relaxed">Reading data is one of my favorite parts about SwiftData and it&#39;s quite similar to CoreData:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">import SwiftData
+
+struct ContentView: View {
+    @Query(sort: \.releaseDate, order: .reverse) var books: [Book]
+
+    ...
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">It&#39;s a tight integration into SwiftUI&#39;s state architecture and re-evaluates the View.body whenever an entry changes, gets added or gets deleted.</p>
+<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">Creating data</h3>
+<p class="text-gray-700 leading-relaxed">To create new entries, we need a <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">ModelContext</code>. Luckily, the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">.modelContainer</code> SceneModifier we added to our WindowScene inserts this context in the Environment. We can easily grab it like this:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">@Environment(\.modelContext) private var context</code></pre>
+<p class="text-gray-700 leading-relaxed">Lastly, we just need to create a model instance and insert it into the context:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">let book = Book(name: &quot;Atomic Habits&quot;, releaseDate: releaseData, author: jamesClearAuthor)
+context.insert(book)</code></pre>
+<p class="text-gray-700 leading-relaxed">Saving is handled implicitly by the framework, but you can always manually call <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">context.save()</code> as well.</p>
+<p class="text-gray-700 leading-relaxed">That&#39;s it! SwiftData is easy to get started. It handles CloudKit automatically if you follow the steps in the <a href="https://developer.apple.com/documentation/swiftdata/syncing-model-data-across-a-persons-devices" class="text-blue-600 hover:underline">documentation</a>. App Groups are also supported out-of-the-box by simply enabling the App Group capability in your target settings.</p>
+
+      </div>
+    </article>
+    <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
+      <p>&copy; 2025 Flo Writes Code. <a href="../../index.html" class="hover:underline">Back to home</a> · <a href="../index.html" class="hover:underline">Blog</a></p>
+    </footer>
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}<\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/swift.min.js"><\/script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.hljs) return;
+        document.querySelectorAll('pre code').forEach(function (el) {
+          window.hljs.highlightElement(el);
+        });
+      });
+    <\/script>
+    <script>
+      (function(){var slot=document.getElementById("sponsor-slot");if(!slot)return;function todayISO(){return new Date().toISOString().slice(0,10);}function pickSponsor(data){if(!data||typeof data!=="object")return null;var today=todayISO(),sponsors=Array.isArray(data.sponsors)?data.sponsors.slice():[];if(sponsors.length){sponsors.sort(function(a,b){var as=a.startDate||"",bs=b.startDate||"";if(as<bs)return 1;if(as>bs)return -1;return 0;});for(var i=0;i<sponsors.length;i++){var s=sponsors[i];if(!s.startDate||!s.endDate)continue;if(s.startDate<=today&&today<=s.endDate)return s;}}if(data.default&&data.default.title)return data.default;if(data.current&&data.current.title)return data.current;return null;}function render(s){if(!s||!s.title)return;var html='<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80 my-8">';html+='<img src="'+(s.icon||'')+'" alt="" class="w-12 h-12 rounded-lg flex-shrink-0 object-cover" onerror="this.style.display=\'none\'">';html+='<div class="min-w-0 flex-1"><div class="font-semibold text-blue-800">'+s.title+'</div>';html+='<p class="text-sm text-gray-600 mt-0.5">'+(s.message||'')+'</p></div></aside>';slot.innerHTML=s.url?'<a href="'+s.url+'" target="_blank" rel="noopener noreferrer" class="block">'+html+'</a>':html;}var el=document.getElementById("sponsor-data");if(el&&el.textContent){try{var data=JSON.parse(el.textContent);var s=pickSponsor(data);if(s)render(s);}catch(e){}}var url=new URL("../sponsors.json",window.location.href).href;fetch(url).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(data){var s=pickSponsor(data);if(s)render(s);}).catch(function(){});})();
+    <\/script>
+  </body>
+</html>
