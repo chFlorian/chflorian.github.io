@@ -209,6 +209,11 @@ var body: some View {
         var knownPosts = [];
         var siteBaseUrl = 'https://chflorian.github.io';
 
+        /** Template embeds <\/script> so the outer script tag is not closed; standalone HTML must use real </script>. */
+        function normalizeExportedHtml(html) {
+          return String(html).replace(/<\\/script>/g, '</script>');
+        }
+
         function normalizeSlug(s) {
           return String(s).toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
         }
@@ -334,14 +339,16 @@ var body: some View {
         function updatePreview() {
           markdownToHtml(markdownEl.value, function (rawBodyHtml) {
             var v = getValues(rawBodyHtml);
-            var html = template
-              .replace(/\{\{title\}\}/g, escapeHtml(v.title))
-              .replace(/\{\{date\}\}/g, v.date)
-              .replace(/\{\{dateFormatted\}\}/g, v.dateFormatted)
-              .replace(/\{\{excerpt\}\}/g, escapeHtml(v.excerpt))
-              .replace(/\{\{canonicalUrl\}\}/g, v.canonicalUrl)
-              .replace(/\{\{socialImageUrl\}\}/g, v.socialImageUrl)
-              .replace(/\{\{body\}\}/, v.bodyHtml);
+            var html = normalizeExportedHtml(
+              template
+                .replace(/\{\{title\}\}/g, escapeHtml(v.title))
+                .replace(/\{\{date\}\}/g, v.date)
+                .replace(/\{\{dateFormatted\}\}/g, v.dateFormatted)
+                .replace(/\{\{excerpt\}\}/g, escapeHtml(v.excerpt))
+                .replace(/\{\{canonicalUrl\}\}/g, v.canonicalUrl)
+                .replace(/\{\{socialImageUrl\}\}/g, v.socialImageUrl)
+                .replace(/\{\{body\}\}/, v.bodyHtml)
+            );
             previewEl.onload = function () {
               try {
                 var doc = previewEl.contentDocument;
@@ -358,14 +365,16 @@ var body: some View {
 
         function buildArticleHtml() {
           var v = getValues();
-          return template
-            .replace(/\{\{title\}\}/g, escapeHtml(v.title))
-            .replace(/\{\{date\}\}/g, v.date)
-            .replace(/\{\{dateFormatted\}\}/g, v.dateFormatted)
-            .replace(/\{\{excerpt\}\}/g, escapeHtml(v.excerpt))
-            .replace(/\{\{canonicalUrl\}\}/g, v.canonicalUrl)
-            .replace(/\{\{socialImageUrl\}\}/g, v.socialImageUrl)
-            .replace(/\{\{body\}\}/, v.bodyHtml);
+          return normalizeExportedHtml(
+            template
+              .replace(/\{\{title\}\}/g, escapeHtml(v.title))
+              .replace(/\{\{date\}\}/g, v.date)
+              .replace(/\{\{dateFormatted\}\}/g, v.dateFormatted)
+              .replace(/\{\{excerpt\}\}/g, escapeHtml(v.excerpt))
+              .replace(/\{\{canonicalUrl\}\}/g, v.canonicalUrl)
+              .replace(/\{\{socialImageUrl\}\}/g, v.socialImageUrl)
+              .replace(/\{\{body\}\}/, v.bodyHtml)
+          );
         }
 
         function getPostsEntry() {
@@ -584,14 +593,16 @@ var body: some View {
 
           function buildFullHtml(bodyHtml) {
             var vals = getValues(bodyHtml);
-            return template
-              .replace(/\{\{title\}\}/g, escapeHtml(vals.title))
-              .replace(/\{\{date\}\}/g, vals.date)
-              .replace(/\{\{dateFormatted\}\}/g, vals.dateFormatted)
-              .replace(/\{\{excerpt\}\}/g, escapeHtml(vals.excerpt))
-              .replace(/\{\{canonicalUrl\}\}/g, vals.canonicalUrl)
-              .replace(/\{\{socialImageUrl\}\}/g, vals.socialImageUrl)
-              .replace(/\{\{body\}\}/, vals.bodyHtml);
+            return normalizeExportedHtml(
+              template
+                .replace(/\{\{title\}\}/g, escapeHtml(vals.title))
+                .replace(/\{\{date\}\}/g, vals.date)
+                .replace(/\{\{dateFormatted\}\}/g, vals.dateFormatted)
+                .replace(/\{\{excerpt\}\}/g, escapeHtml(vals.excerpt))
+                .replace(/\{\{canonicalUrl\}\}/g, vals.canonicalUrl)
+                .replace(/\{\{socialImageUrl\}\}/g, vals.socialImageUrl)
+                .replace(/\{\{body\}\}/, vals.bodyHtml)
+            );
           }
 
           function fallbackSave(fullHtml) {
