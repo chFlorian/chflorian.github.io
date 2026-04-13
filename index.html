@@ -6,6 +6,28 @@
     <title>Flo Writes Code</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
+      .hero-glow {
+        background:
+          radial-gradient(circle at top left, rgba(96, 165, 250, 0.3), transparent 32rem),
+          radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 28rem),
+          linear-gradient(135deg, #eff6ff 0%, #ffffff 45%, #dbeafe 100%);
+      }
+      .hero-highlight {
+        color: #1d4ed8;
+      }
+      .hero-image-placeholder {
+        background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 45%, #1e3a8a 100%);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .hero-image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .hero-image-placeholder:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 28px 60px rgba(37, 99, 235, 0.2);
+      }
       .carousel {
         overflow-x: hidden;
         overflow-y: visible;
@@ -65,19 +87,31 @@
       </div>
     </div>
 
-    <section id="about" class="py-20 bg-white">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <img src="images/image0.png" alt="Flo headshot" class="mx-auto w-48 h-48 object-cover mb-6">
-        <h2 class="text-3xl font-semibold mb-4 text-blue-700">Hey, I'm Flo 👋</h2>
-        <p class="text-lg leading-relaxed text-gray-700">
-          I write code, make YouTube videos about SwiftUI, iOS development, and indie hacking. I love building tools that empower developers and help people live healthier lives.
-        </p>
-        <a href="mailto:hello@flowritesco.de" class="inline-flex items-center mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-        </svg>
-          Contact Me
-        </a>
+    <section id="about" class="py-20 hero-glow overflow-hidden">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          <div class="w-full lg:w-5/12 relative hero-image-placeholder rounded-3xl overflow-hidden shadow-2xl">
+            <img src="images/hero.png" alt="Flo hero portrait" class="hero-image">
+          </div>
+          <div class="w-full lg:w-7/12 text-center lg:text-left">
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">iOS & SwiftUI Developer</p>
+            <p class="mt-6 text-xl md:text-2xl font-semibold text-slate-800">Hey, I'm Flo 👋</p>
+            <h2 class="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-[1.1]">
+              Personal, <span class="hero-highlight">clear</span>, and deeply <span class="hero-highlight">technical</span>.<br>
+              I’ve worked on <span class="hero-highlight">dozens of apps</span>.<br>
+              Across <span class="hero-highlight">professional</span>, <span class="hero-highlight">indie</span>, and <span class="hero-highlight">medical</span> teams.<br>
+              And I love helping others ship better Apple platform products.
+            </h2>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="mailto:hello@flowritesco.de" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition font-semibold">
+                Contact Me
+              </a>
+              <a href="consulting.html" class="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-700 rounded-xl border border-blue-200 shadow-sm hover:bg-blue-50 transition font-semibold">
+                Explore Consulting
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
