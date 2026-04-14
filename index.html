@@ -75,6 +75,49 @@
         height: 100%;
         object-fit: cover;
       }
+      .expertise-showcase {
+        position: relative;
+        min-height: 34rem;
+        padding: 1.5rem 0.5rem;
+      }
+      .expertise-screen {
+        position: absolute;
+        width: 38%;
+        max-width: 13rem;
+        transition: transform 0.35s ease;
+      }
+      .expertise-screen img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .expertise-screen-left {
+        left: 0;
+        bottom: 2.5rem;
+        transform: rotate(-14deg);
+        z-index: 1;
+      }
+      .expertise-screen-center {
+        left: 50%;
+        top: 3.5rem;
+        transform: translateX(-50%);
+        z-index: 3;
+      }
+      .expertise-screen-right {
+        right: 0;
+        bottom: 1.5rem;
+        transform: rotate(16deg);
+        z-index: 2;
+      }
+      .expertise-screen-left:hover {
+        transform: rotate(-14deg) translateY(-8px);
+      }
+      .expertise-screen-center:hover {
+        transform: translateX(-50%) translateY(-8px);
+      }
+      .expertise-screen-right:hover {
+        transform: rotate(16deg) translateY(-8px);
+      }
       .expertise-copy {
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -110,6 +153,68 @@
         border: 1px solid rgba(191, 219, 254, 0.9);
         box-shadow: 0 18px 40px rgba(148, 163, 184, 0.12);
       }
+      .social-proof-shell {
+        background:
+          linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(255, 255, 255, 1) 100%);
+        border-top: 1px solid rgba(226, 232, 240, 0.9);
+        border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      }
+      .social-proof-rail {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+      .social-proof-card {
+        min-height: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        box-shadow: 10px 12px 0 rgba(15, 23, 42, 0.05);
+      }
+      .social-proof-avatar {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #d1fae5;
+        color: #15803d;
+        font-size: 1.35rem;
+        line-height: 1;
+      }
+      .social-proof-avatar-blue {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+      .social-proof-avatar-emerald {
+        background: #d1fae5;
+        color: #15803d;
+      }
+      .social-proof-avatar-amber {
+        background: #fef3c7;
+        color: #b45309;
+      }
+      .social-proof-avatar-rose {
+        background: #ffe4e6;
+        color: #be123c;
+      }
+      .social-proof-avatar-violet {
+        background: #ede9fe;
+        color: #6d28d9;
+      }
+      .social-proof-avatar-cyan {
+        background: #cffafe;
+        color: #0f766e;
+      }
+      .social-proof-stars {
+        color: #fbbf24;
+        letter-spacing: 0.08em;
+      }
+      @media (min-width: 768px) {
+        .social-proof-rail {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
       .blog-preview-card {
         background: rgba(255, 255, 255, 0.92);
         border: 1px solid rgba(191, 219, 254, 0.9);
@@ -133,6 +238,42 @@
       @media (min-width: 900px) {
         .blog-preview-row {
           grid-template-columns: 12rem minmax(0, 1fr) auto;
+        }
+        .social-proof-rail {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 1023px) {
+        .expertise-showcase {
+          min-height: 30rem;
+          max-width: 26rem;
+          margin: 0 auto;
+        }
+      }
+      @media (max-width: 640px) {
+        .expertise-showcase {
+          min-height: 22rem;
+          padding: 0.5rem 0;
+        }
+        .expertise-screen {
+          width: 42%;
+        }
+        .expertise-screen-left {
+          bottom: 1.5rem;
+          transform: rotate(-10deg);
+        }
+        .expertise-screen-center {
+          top: 2.5rem;
+        }
+        .expertise-screen-right {
+          bottom: 1rem;
+          transform: rotate(12deg);
+        }
+        .expertise-screen-left:hover {
+          transform: rotate(-10deg) translateY(-6px);
+        }
+        .expertise-screen-right:hover {
+          transform: rotate(12deg) translateY(-6px);
         }
       }
       @keyframes scroll {
@@ -198,6 +339,73 @@
       </div>
     </section>
 
+    <section aria-label="Social proof" class="py-16 social-proof-shell">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="social-proof-rail">
+          <article class="social-proof-card rounded-3xl p-6">
+            <div class="flex items-center gap-4">
+              <div class="social-proof-avatar social-proof-avatar-blue">MH</div>
+              <p class="text-lg font-semibold text-slate-800">Matt Heaney</p>
+            </div>
+            <p class="social-proof-stars mt-6 text-2xl" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="mt-6 text-base leading-7 text-slate-700">
+              Hey! I just wanted to reach out and say your videos on Bindable and SwiftData are awesome! Great job bud 👏
+            </p>
+          </article>
+          <article class="social-proof-card rounded-3xl p-6">
+            <div class="flex items-center gap-4">
+              <div class="social-proof-avatar social-proof-avatar-emerald">PL</div>
+              <p class="text-lg font-semibold text-slate-800">Peter Ludlow</p>
+            </div>
+            <p class="social-proof-stars mt-6 text-2xl" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="mt-6 text-base leading-7 text-slate-700">
+              Dude, you answered all 3 questions I had around getTimeline in this single video, after failing to find a concrete answer elsewhere. Appreciate the clarity and detail.
+            </p>
+          </article>
+          <article class="social-proof-card rounded-3xl p-6">
+            <div class="flex items-center gap-4">
+              <div class="social-proof-avatar social-proof-avatar-amber">JL</div>
+              <p class="text-lg font-semibold text-slate-800">Joseph Lawler</p>
+            </div>
+            <p class="social-proof-stars mt-6 text-2xl" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="mt-6 text-base leading-7 text-slate-700">
+              Great video! Gets me excited to sit down and code!
+            </p>
+          </article>
+          <article class="social-proof-card rounded-3xl p-6">
+            <div class="flex items-center gap-4">
+              <div class="social-proof-avatar social-proof-avatar-rose">P1</div>
+              <p class="text-lg font-semibold text-slate-800">ps1kx</p>
+            </div>
+            <p class="social-proof-stars mt-6 text-2xl" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="mt-6 text-base leading-7 text-slate-700">
+              You sir, are a champion. Thanks for the explanations! I got stuck at the App Group thing, but you helped me by showing how to use it.
+            </p>
+          </article>
+          <article class="social-proof-card rounded-3xl p-6">
+            <div class="flex items-center gap-4">
+              <div class="social-proof-avatar social-proof-avatar-violet">CP</div>
+              <p class="text-lg font-semibold text-slate-800">Caleb Panza</p>
+            </div>
+            <p class="social-proof-stars mt-6 text-2xl" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="mt-6 text-base leading-7 text-slate-700">
+              Incredibly impressed with Florian’s iOS expertise and clear, practical guidance.
+            </p>
+          </article>
+          <article class="social-proof-card rounded-3xl p-6">
+            <div class="flex items-center gap-4">
+              <div class="social-proof-avatar social-proof-avatar-cyan">TG</div>
+              <p class="text-lg font-semibold text-slate-800">Tim GK</p>
+            </div>
+            <p class="social-proof-stars mt-6 text-2xl" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="mt-6 text-base leading-7 text-slate-700">
+              Really interesting approach, definitely saving this to dive into later. Very clear explanation in the video as well.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="expertise" class="py-20 section-tint">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="mt-10 flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-16">
@@ -209,8 +417,16 @@
             <p class="mt-6 text-lg md:text-xl leading-9 text-slate-700">Thousands of people have learned from my online courses. I've also taught iOS development in universities, both to computer science students and students with no prior experience.</p>
           </div>
           <div class="w-full lg:w-5/12">
-            <div class="expertise-image-placeholder">
-              <img src="images/hero2.png" alt="Flo working portrait" class="expertise-image">
+            <div class="expertise-showcase" aria-label="App screenshots showcase">
+              <figure class="expertise-screen expertise-screen-left">
+                <img src="images/app-screens/kijani.png" alt="Kijani app screenshot">
+              </figure>
+              <figure class="expertise-screen expertise-screen-center">
+                <img src="images/app-screens/1x1.png" alt="1x1 app screenshot">
+              </figure>
+              <figure class="expertise-screen expertise-screen-right">
+                <img src="images/app-screens/launchbuddy.png" alt="LaunchBuddy app screenshot">
+              </figure>
             </div>
           </div>
         </div>
