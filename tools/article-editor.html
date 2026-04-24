@@ -263,7 +263,19 @@ var body: some View {
           return html.slice(0, pos) + '\n' + slot + '\n' + html.slice(pos);
         }
 
-        // Marked 12 renderer: add blog-specific classes (marked 12 passes parsed content, not tokens)
+        // Resolve marked from different UMD shapes and fall back safely.
+        var markedApi = null;
+        if (typeof window !== 'undefined' && window.marked) {
+          if (typeof window.marked.parse === 'function') {
+            markedApi = window.marked;
+          } else if (window.marked.marked && typeof window.marked.marked.parse === 'function') {
+            markedApi = window.marked.marked;
+          }
+        } else if (typeof marked !== 'undefined' && typeof marked.parse === 'function') {
+          markedApi = marked;
+        }
+
+        // Marked renderer: add blog-specific classes.
         var renderer = {
           paragraph: function (body) {
             return '<p class="text-gray-700 leading-relaxed">' + body + '</p>\n';
@@ -292,10 +304,28 @@ var body: some View {
             return html;
           }
         };
-        if (typeof marked.use === 'function') {
-          marked.use({ renderer: renderer });
-        } else {
-          marked.setOptions({ renderer: renderer });
+        if (markedApi && typeof markedApi.use === 'function') {
+          markedApi.use({ renderer: renderer });
+        } else if (markedApi && typeof markedApi.setOptions === 'function') {
+          markedApi.setOptions({ renderer: renderer });
+        }
+
+        function basicMarkdownToHtml(md) {
+          var source = String(md || '');
+          if (!source.trim()) return '<p class="text-gray-700 leading-relaxed">Your content here.</p>';
+          var escaped = escapeHtml(source);
+          escaped = escaped.replace(/^### (.*)$/gm, '<h3 class="text-xl font-bold text-blue-800 mt-8 mb-2">$1</h3>');
+          escaped = escaped.replace(/^## (.*)$/gm, '<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">$1</h2>');
+          escaped = escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+          escaped = escaped.replace(/\*(.+?)\*/g, '<em>$1</em>');
+          escaped = escaped.replace(/`([^`]+)`/g, '<code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">$1</code>');
+          return escaped
+            .split(/\n{2,}/)
+            .map(function (block) {
+              if (/^<h[23]\b/.test(block)) return block;
+              return '<p class="text-gray-700 leading-relaxed">' + block.replace(/\n/g, '<br>') + '</p>';
+            })
+            .join('\n');
         }
 
         function markdownToHtml(md, callback) {
@@ -303,8 +333,12 @@ var body: some View {
             var fallback = '<p class="text-gray-700 leading-relaxed">Your content here.</p>';
             return callback ? (callback(fallback), undefined) : fallback;
           }
+          if (!markedApi || typeof markedApi.parse !== 'function') {
+            var fallbackHtml = basicMarkdownToHtml(md);
+            return callback ? (callback(fallbackHtml), undefined) : fallbackHtml;
+          }
           try {
-            var result = marked.parse(md);
+            var result = markedApi.parse(md);
             if (result && typeof result.then === 'function') {
               if (callback) {
                 result.then(callback).catch(function () { callback('<p class="text-gray-700 leading-relaxed">' + escapeHtml(md) + '</p>'); });
