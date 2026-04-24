@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop Using Padding Everywhere — Flo Writes Code</title>
+    <meta name="description" content="Padding is my most-used ViewModifiers. In these 3 situations I prefer better alternatives." />
+    <meta name="author" content="Flo Writes Code" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Flo Writes Code" />
+    <meta property="og:title" content="Stop Using Padding Everywhere" />
+    <meta property="og:description" content="Padding is my most-used ViewModifiers. In these 3 situations I prefer better alternatives." />
+    <meta property="og:url" content="https://chflorian.github.io/blog/stop-using-padding/" />
+    <meta property="og:image" content="https://chflorian.github.io/blog/stop-using-padding/social-preview.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Stop Using Padding Everywhere" />
+    <meta name="twitter:description" content="Padding is my most-used ViewModifiers. In these 3 situations I prefer better alternatives." />
+    <meta name="twitter:image" content="https://chflorian.github.io/blog/stop-using-padding/social-preview.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/xcode.min.css" rel="stylesheet">
+    <style>
+      .prose pre { margin: 1rem 0; padding: 0; }
+      .prose pre code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.875rem; line-height: 1.5; }
+      .prose pre code.hljs { padding: 1.25rem 1.5rem; border-radius: 0.75rem; display: block; overflow-x: auto; }
+      .prose img { border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+  </head>
+  <body class="bg-blue-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="../../index.html" class="text-2xl font-bold text-blue-600 hover:underline">Flo Writes Code</a>
+        <nav class="space-x-4">
+          <a href="../../index.html#about" class="hover:underline text-blue-600">About</a>
+          <a href="../index.html" class="hover:underline text-blue-600 font-semibold">Blog</a>
+          <a href="../../index.html#youtube" class="hover:underline text-blue-600">YouTube</a>
+          <a href="../../index.html#apps" class="hover:underline text-blue-600">Apps</a>
+        </nav>
+      </div>
+    </header>
+    <article class="max-w-3xl mx-auto px-4 py-12">
+      <a href="../index.html" class="inline-flex items-center text-blue-600 hover:underline text-sm mb-8">← Back to Blog</a>
+      <header class="mb-10">
+        <time class="text-sm text-gray-500" datetime="2026-04-24">April 24, 2026</time>
+        <h1 class="text-4xl font-bold text-blue-800 mt-2">Stop Using Padding Everywhere</h1>
+        <p class="text-xl text-gray-600 mt-4">Padding is my most-used ViewModifiers. In these 3 situations I prefer better alternatives.</p>
+      </header>
+      <div class="prose prose-lg max-w-none">
+        <p class="text-gray-700 leading-relaxed">Don&#39;t get me wrong, it&#39;s totally fine to use .padding(). I use it <strong>a lot</strong> as well! And in the first few versions of SwiftUI, there really weren&#39;t many alternatives. But now there are, so let&#39;s explore them.</p>
+<div id="sponsor-slot"></div>
+
+<div class="my-8 aspect-video w-full max-w-2xl rounded-lg shadow-md overflow-hidden">
+  <iframe class="w-full h-full" src="https://www.youtube.com/embed/uyuFm2SbWdI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+
+
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">Stacks</h2>
+<p class="text-gray-700 leading-relaxed">What I used to do: </p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">VStack {
+  FirstView()
+    .padding(.bottom, 16)
+
+  SecondView()
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">For two Views in one Stack, this might seem fine. Imagine this setup for multiple Views - all of them getting <em>modified</em> to have padding at the bottom. The semantics are important: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">.padding()</code> modifies the View to have empty space at the bottom. This is not the same as creating Space between Views. To create space between the Views in any Stack, you should use the <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">spacing:</code> parameter:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">VStack(spacing: 24) {
+  FirstView()
+
+  SecondView()
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">Please note that the default spacing of Stacks (if you ommit the spacing parameter entirely) changes depending on context. In my tests on an iPhone 17 simulator running iOS 26.0, it&#39;s round about 8. That&#39;s why the second code sample uses 24 points of spacing (16 + 8).</p>
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">ScrollViews</h2>
+<p class="text-gray-700 leading-relaxed">We all know this annoying problem with ScrollViews: We apply a .padding() to the ScrollView, so everything inside is moved away from the device edges. Unfortunately, this also moves the scrollbar away from the edge, making it cover the content. Of course you could just apply the padding to the scroll content, but there&#39;s a more contextual alternative:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">// &quot;Wrong&quot; Example
+
+ScrollView {
+  ...
+}
+.padding()
+
+// &quot;Correct&quot; Example
+ScrollView {
+  ...
+}
+.contentMargins(16, for: .scrollContent)</code></pre>
+<p class="text-gray-700 leading-relaxed">Using content margins makes it more explicit, which is almost always a good thing (regarding readability of your code). You can use the same modifier to move the scroll bar as well, just use <code class="bg-blue-100 px-1.5 py-0.5 rounded text-sm">.scrollIndicators</code> instead.</p>
+<h2 class="text-2xl font-bold text-blue-800 mt-10 mb-4">Lists</h2>
+<p class="text-gray-700 leading-relaxed">This one is similar to ScrollViews in that it adds context, but it also serves a functional purpose. Consider this &quot;incorrect&quot; example of using padding to inset content in a list row:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">List {
+  FirstView()
+    .padding(.leading, 8)
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">Once again, this might read fine at first. I already hinted at the contextual issue here: You don&#39;t really want to make the View larger (= add padding). Instead, you want to inset the View from its parent (the list row, a View structure implicitly created by the List). So the more contextual API is this:</p>
+<pre class="rounded-xl overflow-x-auto"><code class="language-swift">List {
+  FirstView()
+    .listRowInsets(.leading, 8)
+}</code></pre>
+<p class="text-gray-700 leading-relaxed">Important: The default value is actually not 0 - it&#39;s something like 8. This means that using a value below 8 allows you to move the View closer to the device edge than normally. This is the added functionality I hinted at before.</p>
+<p class="text-gray-700 leading-relaxed">I hope you enjoyed this article. Let me know what you want to learn about next.</p>
+
+      </div>
+    </article>
+    <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
+      <p>&copy; 2025 Flo Writes Code. <a href="../../index.html" class="hover:underline">Back to home</a> · <a href="../index.html" class="hover:underline">Blog</a></p>
+    </footer>
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}<\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/swift.min.js"><\/script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.hljs) return;
+        document.querySelectorAll('pre code').forEach(function (el) {
+          window.hljs.highlightElement(el);
+        });
+      });
+    <\/script>
+    <script>
+      (function(){var slot=document.getElementById("sponsor-slot");if(!slot)return;function todayISO(){return new Date().toISOString().slice(0,10);}function pickSponsor(data){if(!data||typeof data!=="object")return null;var today=todayISO(),sponsors=Array.isArray(data.sponsors)?data.sponsors.slice():[];if(sponsors.length){sponsors.sort(function(a,b){var as=a.startDate||"",bs=b.startDate||"";if(as<bs)return 1;if(as>bs)return -1;return 0;});for(var i=0;i<sponsors.length;i++){var s=sponsors[i];if(!s.startDate||!s.endDate)continue;if(s.startDate<=today&&today<=s.endDate)return s;}}if(data.default&&data.default.title)return data.default;if(data.current&&data.current.title)return data.current;return null;}function render(s){if(!s||!s.title)return;var html='<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80 my-8">';html+='<img src="'+(s.icon||'')+'" alt="" class="w-12 h-12 rounded-lg flex-shrink-0 object-cover" onerror="this.style.display=\'none\'">';html+='<div class="min-w-0 flex-1"><div class="font-semibold text-blue-800">'+s.title+'</div>';html+='<p class="text-sm text-gray-600 mt-0.5">'+(s.message||'')+'</p></div></aside>';slot.innerHTML=s.url?'<a href="'+s.url+'" target="_blank" rel="noopener noreferrer" class="block">'+html+'</a>':html;}var el=document.getElementById("sponsor-data");if(el&&el.textContent){try{var data=JSON.parse(el.textContent);var s=pickSponsor(data);if(s)render(s);}catch(e){}}var url=new URL("../sponsors.json",window.location.href).href;fetch(url).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(data){var s=pickSponsor(data);if(s)render(s);}).catch(function(){});})();
+    <\/script>
+  </body>
+</html>
