@@ -106,9 +106,9 @@ ScrollView {
     <footer class="py-6 bg-white text-center text-sm text-blue-800 mt-12">
       <p>&copy; 2025 Flo Writes Code. <a href="../../index.html" class="hover:underline">Back to home</a> · <a href="../index.html" class="hover:underline">Blog</a></p>
     </footer>
-    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}<\/script>
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"><\/script>
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/swift.min.js"><\/script>
+    <script type="application/json" id="sponsor-data">{"default":{"icon":"https://launchbuddy.app/appicon.png","title":"LaunchBuddy","message":"The only project manager made for indie developers","url":"https://launchbuddy.app"},"sponsors":[],"current":null,"history":[]}</script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/swift.min.js"></script>
     <script>
       window.addEventListener('DOMContentLoaded', function () {
         if (!window.hljs) return;
@@ -116,9 +116,9 @@ ScrollView {
           window.hljs.highlightElement(el);
         });
       });
-    <\/script>
+    </script>
     <script>
       (function(){var slot=document.getElementById("sponsor-slot");if(!slot)return;function todayISO(){return new Date().toISOString().slice(0,10);}function pickSponsor(data){if(!data||typeof data!=="object")return null;var today=todayISO(),sponsors=Array.isArray(data.sponsors)?data.sponsors.slice():[];if(sponsors.length){sponsors.sort(function(a,b){var as=a.startDate||"",bs=b.startDate||"";if(as<bs)return 1;if(as>bs)return -1;return 0;});for(var i=0;i<sponsors.length;i++){var s=sponsors[i];if(!s.startDate||!s.endDate)continue;if(s.startDate<=today&&today<=s.endDate)return s;}}if(data.default&&data.default.title)return data.default;if(data.current&&data.current.title)return data.current;return null;}function render(s){if(!s||!s.title)return;var html='<aside class="sponsor-box flex items-center gap-4 p-4 rounded-xl border border-blue-200 bg-blue-50/80 my-8">';html+='<img src="'+(s.icon||'')+'" alt="" class="w-12 h-12 rounded-lg flex-shrink-0 object-cover" onerror="this.style.display=\'none\'">';html+='<div class="min-w-0 flex-1"><div class="font-semibold text-blue-800">'+s.title+'</div>';html+='<p class="text-sm text-gray-600 mt-0.5">'+(s.message||'')+'</p></div></aside>';slot.innerHTML=s.url?'<a href="'+s.url+'" target="_blank" rel="noopener noreferrer" class="block">'+html+'</a>':html;}var el=document.getElementById("sponsor-data");if(el&&el.textContent){try{var data=JSON.parse(el.textContent);var s=pickSponsor(data);if(s)render(s);}catch(e){}}var url=new URL("../sponsors.json",window.location.href).href;fetch(url).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(data){var s=pickSponsor(data);if(s)render(s);}).catch(function(){});})();
-    <\/script>
+    </script>
   </body>
 </html>
