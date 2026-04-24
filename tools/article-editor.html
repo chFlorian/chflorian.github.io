@@ -211,7 +211,7 @@ var body: some View {
 
         /** Template embeds <\/script> so the outer script tag is not closed; standalone HTML must use real <\/script>. */
         function normalizeExportedHtml(html) {
-          return String(html).replace(/<\/script>/g, '</script>');
+          return String(html).replace(/<\/script>/g, '</scr' + 'ipt>');
         }
 
         function normalizeSlug(s) {
